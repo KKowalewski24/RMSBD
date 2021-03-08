@@ -11,7 +11,7 @@ namespace SchemaTask1Console {
 
         private static readonly DbContextOptions<ApplicationContext> DbContextOptions =
             new DbContextOptionsBuilder<ApplicationContext>()
-                .UseMySql($"server=localhost;database={DbName};user=root;password=admin")
+                .UseNpgsql($"Host=localhost;Database={DbName};Username=postgres;Password=admin")
                 .Options;
 
         /*------------------------ METHODS REGION ------------------------*/
