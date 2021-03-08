@@ -6,8 +6,7 @@ namespace SchemaTask1Console {
     public class Program {
 
         /*------------------------ FIELDS REGION ------------------------*/
-        /*TODO CHANGE FOR PROPER NAME*/
-        private const string DbName = "Task1DB";
+        private const string DbName = "GroceryShopsDB";
 
         private static readonly DbContextOptions<ApplicationContext> DbContextOptions =
             new DbContextOptionsBuilder<ApplicationContext>()
