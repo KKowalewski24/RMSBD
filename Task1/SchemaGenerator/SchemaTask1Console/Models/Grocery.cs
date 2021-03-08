@@ -8,7 +8,7 @@ namespace SchemaTask1Console.Models {
         public string Address { get; private set; }
         public IEnumerable<Product> AvailableProducts { get; private set; }
         public IEnumerable<HistoricalProduct> AllSoldProducts { get; private set; }
-        public IEnumerable<Supplier> Suppliers { get; private set; } = new List<Supplier>();
+        public Supplier Supplier { get; set; }
 
         /*------------------------ METHODS REGION ------------------------*/
         protected Grocery() {
@@ -30,7 +30,7 @@ namespace SchemaTask1Console.Models {
                    $"{nameof(Address)}: {Address}, " +
                    $"{nameof(AvailableProducts)}: {AvailableProducts}, " +
                    $"{nameof(AllSoldProducts)}: {AllSoldProducts}, " +
-                   $"{nameof(Suppliers)}: {Suppliers}";
+                   $"{nameof(Supplier)}: {Supplier}";
         }
 
     }
