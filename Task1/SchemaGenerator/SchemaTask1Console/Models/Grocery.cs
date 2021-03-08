@@ -7,8 +7,8 @@ namespace SchemaTask1Console.Models {
         /*------------------------ FIELDS REGION ------------------------*/
         public string Address { get; private set; }
         public IEnumerable<Product> AvailableProducts { get; private set; }
-        public IEnumerable<Product> AllSoldProducts { get; private set; }
-        public IEnumerable<Supplier> Suppliers { get; private set; }
+        public IEnumerable<HistoricalProduct> AllSoldProducts { get; private set; }
+        public IEnumerable<Supplier> Suppliers { get; private set; } = new List<Supplier>();
 
         /*------------------------ METHODS REGION ------------------------*/
         protected Grocery() {
@@ -19,11 +19,10 @@ namespace SchemaTask1Console.Models {
         }
 
         public Grocery(string address, IEnumerable<Product> availableProducts,
-                       IEnumerable<Product> allSoldProducts, IEnumerable<Supplier> suppliers) {
+                       IEnumerable<HistoricalProduct> allSoldProducts) {
             Address = address;
             AvailableProducts = availableProducts;
             AllSoldProducts = allSoldProducts;
-            Suppliers = suppliers;
         }
 
         public override string ToString() {

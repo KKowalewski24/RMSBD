@@ -9,8 +9,8 @@ namespace SchemaTask1Console.Models {
         public float GrossVehicleWeight { get; private set; }
         public Employee Employee { get; private set; }
         public IEnumerable<Product> AvailableProducts { get; private set; }
-        public IEnumerable<Product> AllBoughtProducts { get; private set; }
-        public IEnumerable<Grocery> Groceries { get; private set; }
+        public IEnumerable<HistoricalProduct> AllBoughtProducts { get; private set; }
+        public IEnumerable<Grocery> Groceries { get; private set; } = new List<Grocery>();
 
         /*------------------------ METHODS REGION ------------------------*/
         protected Supplier() {
@@ -21,15 +21,14 @@ namespace SchemaTask1Console.Models {
             GrossVehicleWeight = grossVehicleWeight;
         }
 
-        public Supplier(string name, Employee employee, float grossVehicleWeight,
+        public Supplier(string name, float grossVehicleWeight, Employee employee,
                         IEnumerable<Product> availableProducts,
-                        IEnumerable<Product> allBoughtProducts, IEnumerable<Grocery> groceries) {
+                        IEnumerable<HistoricalProduct> allBoughtProducts) {
             Name = name;
-            Employee = employee;
             GrossVehicleWeight = grossVehicleWeight;
+            Employee = employee;
             AvailableProducts = availableProducts;
             AllBoughtProducts = allBoughtProducts;
-            Groceries = groceries;
         }
 
         public override string ToString() {
