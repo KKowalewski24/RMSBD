@@ -14,6 +14,10 @@ namespace SchemaTask1Console.Models {
         protected Grocery() {
         }
 
+        public Grocery(string address) {
+            Address = address;
+        }
+
         public Grocery(string address, IEnumerable<Product> availableProducts,
                        IEnumerable<Product> allSoldProducts, IEnumerable<Supplier> suppliers) {
             Address = address;

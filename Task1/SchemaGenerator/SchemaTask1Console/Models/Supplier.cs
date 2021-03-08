@@ -6,14 +6,19 @@ namespace SchemaTask1Console.Models {
 
         /*------------------------ FIELDS REGION ------------------------*/
         public string Name { get; private set; }
-        public Employee Employee { get; private set; }
         public float GrossVehicleWeight { get; private set; }
+        public Employee Employee { get; private set; }
         public IEnumerable<Product> AvailableProducts { get; private set; }
         public IEnumerable<Product> AllBoughtProducts { get; private set; }
         public IEnumerable<Grocery> Groceries { get; private set; }
 
         /*------------------------ METHODS REGION ------------------------*/
         protected Supplier() {
+        }
+
+        public Supplier(string name, float grossVehicleWeight) {
+            Name = name;
+            GrossVehicleWeight = grossVehicleWeight;
         }
 
         public Supplier(string name, Employee employee, float grossVehicleWeight,
