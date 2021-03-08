@@ -5,15 +5,13 @@
         /*------------------------ FIELDS REGION ------------------------*/
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-
-        /*TODO CHANGE FOR PROPER TYPE*/
-        public float Salary { get; private set; }
+        public decimal Salary { get; private set; }
 
         /*------------------------ METHODS REGION ------------------------*/
         protected Employee() {
         }
 
-        public Employee(string firstName, string lastName, float salary) {
+        public Employee(string firstName, string lastName, decimal salary) {
             FirstName = firstName;
             LastName = lastName;
             Salary = salary;

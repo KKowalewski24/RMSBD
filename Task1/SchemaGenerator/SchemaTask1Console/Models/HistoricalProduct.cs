@@ -5,17 +5,14 @@ namespace SchemaTask1Console.Models {
     public class HistoricalProduct : Product {
 
         /*------------------------ FIELDS REGION ------------------------*/
-        /*todo change for price type*/
-        public float Price { get; private set; }
-
-        /*TODO CHANGE FOR PROPER TYPE - ONLY DATE*/
+        public decimal Price { get; private set; }
         public DateTime TransactionDate { get; private set; }
 
         /*------------------------ METHODS REGION ------------------------*/
         protected HistoricalProduct() {
         }
 
-        public HistoricalProduct(string name, float amount, float price, DateTime transactionDate)
+        public HistoricalProduct(string name, float amount, decimal price, DateTime transactionDate)
             : base(name, amount) {
             Price = price;
             TransactionDate = transactionDate;
