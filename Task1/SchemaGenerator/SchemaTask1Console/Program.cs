@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SchemaTask1Console.EF;
 using SchemaTask1Console.Models;
@@ -33,8 +32,8 @@ namespace SchemaTask1Console {
         private static readonly List<SoldProduct> _soldProductsGrocery = new List<SoldProduct>();
         private static readonly List<Employee> _employeesGrocery = new List<Employee>();
         private static readonly List<Employee> _employeesSupplier = new List<Employee>();
-        private static readonly List<Supplier> _suppliers = new List<Supplier>();
         private static readonly List<Grocery> _groceries = new List<Grocery>();
+        private static readonly List<Supplier> _suppliers = new List<Supplier>();
 
         /*------------------------ METHODS REGION ------------------------*/
         public static void Main(string[] args) {
@@ -45,6 +44,7 @@ namespace SchemaTask1Console {
             _employeesGrocery.AddRange(GenerateEmployees(20));
             _employeesSupplier.AddRange(GenerateEmployees(10));
             _groceries.AddRange(GenerateGrocery(5));
+            _suppliers.AddRange(GenerateSupplier(10));
 
             using (ApplicationContext context = new ApplicationContext(DbContextOptions)) {
                 PrepareDatabase(context);
@@ -63,7 +63,7 @@ namespace SchemaTask1Console {
             string[] names = File.ReadAllLines(ProductNamesPath);
 
             for (int i = 0; i < numberOfProducts; i++) {
-                (int index, int amount, _, _, _, _) = GenerateRandomValues(names.Length);
+                (int index, int amount, _, _, _, _, _) = GenerateRandomValues(names.Length);
                 yield return new Product(names[index], amount);
             }
         }
@@ -72,7 +72,7 @@ namespace SchemaTask1Console {
             string[] names = File.ReadAllLines(ProductNamesPath);
 
             for (int i = 0; i < numberOfProducts; i++) {
-                (int index, int amount, int price, DateTime dateTime, _, _) =
+                (int index, int amount, int price, DateTime dateTime, _, _, _) =
                     GenerateRandomValues(names.Length);
                 yield return new BoughtProduct(names[index], amount, price, dateTime);
             }
@@ -82,7 +82,7 @@ namespace SchemaTask1Console {
             string[] names = File.ReadAllLines(ProductNamesPath);
 
             for (int i = 0; i < numberOfProducts; i++) {
-                (int index, int amount, int price, DateTime dateTime, _, _) =
+                (int index, int amount, int price, DateTime dateTime, _, _, _) =
                     GenerateRandomValues(names.Length);
                 yield return new SoldProduct(names[index], amount, price, dateTime);
             }
@@ -93,7 +93,7 @@ namespace SchemaTask1Console {
             string[] LastNames = File.ReadAllLines(LastNamesPath);
 
             for (int i = 0; i < numberOfEmployees; i++) {
-                (int index, _, _, _, int salary, DateTime dateTimeEmployee) =
+                (int index, _, _, _, int salary, DateTime dateTimeEmployee, _) =
                     GenerateRandomValues(firstNames.Length);
                 yield return new Employee(
                     firstNames[index], LastNames[index], salary, dateTimeEmployee
@@ -105,27 +105,30 @@ namespace SchemaTask1Console {
             string[] addresses = File.ReadAllLines(AddressesPath);
 
             for (int i = 0; i < numberOfGroceries; i++) {
-                (int index, _, _, _, _, _) = GenerateRandomValues(addresses.Length);
-                /*TODO ADD SPLITING LISTS*/
-                Grocery grocery = new Grocery(
-                    addresses[index],
-                    _productsGrocery,
-                    _soldProductsGrocery, _employeesGrocery
-                );
-                yield return grocery;
+                (int index, _, _, _, _, _, _) = GenerateRandomValues(addresses.Length);
+                yield return new Grocery(addresses[index]);
             }
         }
 
-        private static (int, int, int, DateTime, int, DateTime)
-            GenerateRandomValues(int arrayLength) {
+        private static IEnumerable<Supplier> GenerateSupplier(int numberOfSupplier) {
+            for (int i = 0; i < numberOfSupplier; i++) {
+                (_, _, _, _, _, _, int grossVehicleWeight) = GenerateRandomValues();
+                yield return new Supplier($"Supplier{i + 1}", grossVehicleWeight);
+            }
+        }
+
+        private static (int, int, int, DateTime, int, DateTime, int)
+            GenerateRandomValues(int arrayLength = 0) {
             int index = _random.Next(0, arrayLength);
             int amount = _random.Next(1, 25);
             int price = _random.Next(1, 20);
             DateTime dateTimeProduct = new RandomDateTime(2019, 2021).Next();
             DateTime dateTimeEmployee = new RandomDateTime(2010, 2021).Next();
             int salary = _random.Next(1000, 8000);
+            int grossVehicleWeight = _random.Next(300, 1500);
 
-            return (index, amount, price, dateTimeProduct, salary, dateTimeEmployee);
+            return (index, amount, price, dateTimeProduct, salary, dateTimeEmployee,
+                    grossVehicleWeight);
         }
 
     }
