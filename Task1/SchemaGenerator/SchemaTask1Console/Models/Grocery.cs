@@ -6,6 +6,7 @@ namespace SchemaTask1Console.Models {
 
         /*------------------------ FIELDS REGION ------------------------*/
         public string Address { get; private set; }
+        
         public List<Product> AvailableProducts { get; private set; } = new List<Product>();
         public List<SoldProduct> AllSoldProducts { get; private set; } = new List<SoldProduct>();
         public List<Employee> Employees { get; private set; } = new List<Employee>();

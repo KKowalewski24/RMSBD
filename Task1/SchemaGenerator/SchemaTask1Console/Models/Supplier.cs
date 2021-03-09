@@ -7,6 +7,7 @@ namespace SchemaTask1Console.Models {
         /*------------------------ FIELDS REGION ------------------------*/
         public string Name { get; private set; }
         public float GrossVehicleWeight { get; private set; }
+
         public Employee Employee { get; set; }
         public List<Grocery> Groceries { get; private set; } = new List<Grocery>();
         public List<Product> AvailableProducts { get; private set; } = new List<Product>();
@@ -21,12 +22,6 @@ namespace SchemaTask1Console.Models {
         public Supplier(string name, float grossVehicleWeight) {
             Name = name;
             GrossVehicleWeight = grossVehicleWeight;
-        }
-
-        public Supplier(string name, float grossVehicleWeight, Employee employee) {
-            Name = name;
-            GrossVehicleWeight = grossVehicleWeight;
-            Employee = employee;
         }
 
         public override string ToString() {

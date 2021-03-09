@@ -9,6 +9,7 @@ namespace SchemaTask1Console.Models {
         public float Amount { get; private set; }
         public decimal Price { get; private set; }
         public DateTime TransactionDate { get; private set; }
+        
         public Supplier Supplier { get; set; }
 
         /*------------------------ METHODS REGION ------------------------*/
@@ -20,15 +21,6 @@ namespace SchemaTask1Console.Models {
             Amount = amount;
             Price = price;
             TransactionDate = transactionDate;
-        }
-
-        public BoughtProduct(string name, float amount, decimal price,
-                             DateTime transactionDate, Supplier supplier) {
-            Name = name;
-            Amount = amount;
-            Price = price;
-            TransactionDate = transactionDate;
-            Supplier = supplier;
         }
 
         public override string ToString() {
