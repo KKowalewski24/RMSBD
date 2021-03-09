@@ -11,7 +11,10 @@ SELECT *
 FROM suppliers;
 
 SELECT *
-FROM historicalproducts;
+FROM soldproduct;
+
+SELECT *
+FROM boughtproduct;
 
 SELECT *
 FROM products;
