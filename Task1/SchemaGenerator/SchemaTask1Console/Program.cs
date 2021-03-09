@@ -37,19 +37,35 @@ namespace SchemaTask1Console {
 
         /*------------------------ METHODS REGION ------------------------*/
         public static void Main(string[] args) {
-            _productsGrocery.AddRange(GenerateProducts(50));
-            _productsSupplier.AddRange(GenerateProducts(50));
-            _boughtProductsSupplier.AddRange(GenerateBoughtProducts(50));
-            _soldProductsGrocery.AddRange(GenerateSoldProducts(50));
-            _employeesGrocery.AddRange(GenerateEmployees(20));
-            _employeesSupplier.AddRange(GenerateEmployees(10));
-            _groceries.AddRange(GenerateGrocery(5));
-            _suppliers.AddRange(GenerateSupplier(10));
+            _productsGrocery.AddRange(GenerateProducts(60));
+            _productsSupplier.AddRange(GenerateProducts(60));
+            _boughtProductsSupplier.AddRange(GenerateBoughtProducts(60));
+            _soldProductsGrocery.AddRange(GenerateSoldProducts(60));
+            _employeesGrocery.AddRange(GenerateEmployees(24));
+            _employeesSupplier.AddRange(GenerateEmployees(2));
+
+            _groceries.AddRange(GenerateGrocery(6));
+            _suppliers.AddRange(GenerateSupplier(2));
+
+            for (int i = 0; i < _groceries.Count; i++) {
+                _groceries[i].AvailableProducts.AddRange(_productsGrocery.GetRange(i * 10, 10));
+                _groceries[i].AllSoldProducts.AddRange(_soldProductsGrocery.GetRange(i * 10, 10));
+                _groceries[i].Employees.AddRange(_employeesGrocery.GetRange(i * 4, 4));
+            }
+
+            for (int i = 0; i < _suppliers.Count; i++) {
+                _suppliers[i].Employee = _employeesSupplier.GetRange(i, 1)[0];
+                _suppliers[i].Groceries.AddRange(_groceries.GetRange(i * 3, 3));
+                _suppliers[i].AvailableProducts
+                    .AddRange(_productsSupplier.GetRange(i * 30, 30));
+                _suppliers[i].AllBoughtProducts
+                    .AddRange(_boughtProductsSupplier.GetRange(i * 30, 30));
+            }
 
             using (ApplicationContext context = new ApplicationContext(DbContextOptions)) {
                 PrepareDatabase(context);
 
-                context.Groceries.AddRange(_groceries);
+                context.Suppliers.AddRange(_suppliers);
                 context.SaveChanges();
             }
         }

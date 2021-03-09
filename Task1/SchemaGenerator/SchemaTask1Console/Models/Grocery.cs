@@ -6,9 +6,9 @@ namespace SchemaTask1Console.Models {
 
         /*------------------------ FIELDS REGION ------------------------*/
         public string Address { get; private set; }
-        public List<Product> AvailableProducts { get; private set; }
-        public List<SoldProduct> AllSoldProducts { get; private set; }
-        public List<Employee> Employees { get; private set; }
+        public List<Product> AvailableProducts { get; private set; } = new List<Product>();
+        public List<SoldProduct> AllSoldProducts { get; private set; } = new List<SoldProduct>();
+        public List<Employee> Employees { get; private set; } = new List<Employee>();
         public Supplier Supplier { get; set; }
 
         /*------------------------ METHODS REGION ------------------------*/
@@ -17,14 +17,6 @@ namespace SchemaTask1Console.Models {
 
         public Grocery(string address) {
             Address = address;
-        }
-
-        public Grocery(string address, List<Product> availableProducts,
-                       List<SoldProduct> allSoldProducts, List<Employee> employees) {
-            Address = address;
-            AvailableProducts = availableProducts;
-            AllSoldProducts = allSoldProducts;
-            Employees = employees;
         }
 
         public override string ToString() {
