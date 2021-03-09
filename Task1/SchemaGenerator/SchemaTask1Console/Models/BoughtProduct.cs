@@ -2,24 +2,33 @@
 
 namespace SchemaTask1Console.Models {
 
-    public class HistoricalProduct : BaseEntity {
+    public class BoughtProduct : BaseEntity {
 
         /*------------------------ FIELDS REGION ------------------------*/
         public string Name { get; private set; }
         public float Amount { get; private set; }
         public decimal Price { get; private set; }
         public DateTime TransactionDate { get; private set; }
+        public Supplier Supplier { get; set; }
 
         /*------------------------ METHODS REGION ------------------------*/
-        protected HistoricalProduct() {
+        protected BoughtProduct() {
         }
 
-        public HistoricalProduct(string name, float amount, decimal price,
-                                 DateTime transactionDate) {
+        public BoughtProduct(string name, float amount, decimal price, DateTime transactionDate) {
             Name = name;
             Amount = amount;
             Price = price;
             TransactionDate = transactionDate;
+        }
+
+        public BoughtProduct(string name, float amount, decimal price,
+                             DateTime transactionDate, Supplier supplier) {
+            Name = name;
+            Amount = amount;
+            Price = price;
+            TransactionDate = transactionDate;
+            Supplier = supplier;
         }
 
         public override string ToString() {
@@ -27,7 +36,8 @@ namespace SchemaTask1Console.Models {
                    $"{nameof(Name)}: {Name}, " +
                    $"{nameof(Amount)}: {Amount}, " +
                    $"{nameof(Price)}: {Price}, " +
-                   $"{nameof(TransactionDate)}: {TransactionDate}";
+                   $"{nameof(TransactionDate)}: {TransactionDate}, " +
+                   $"{nameof(Supplier)}: {Supplier}";
         }
 
     }

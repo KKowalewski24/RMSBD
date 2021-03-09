@@ -7,9 +7,9 @@ namespace SchemaTask1Console.EF {
 
         /*------------------------ FIELDS REGION ------------------------*/
         public DbSet<Product> Products { get; private set; }
-        public DbSet<HistoricalProduct> HistoricalProducts { get; private set; }
+        public DbSet<SoldProduct> SoldProducts { get; private set; }
+        public DbSet<SoldProduct> BoughtProducts { get; private set; }
         public DbSet<Employee> Employees { get; private set; }
-
         public DbSet<Supplier> Suppliers { get; private set; }
         public DbSet<Grocery> Groceries { get; private set; }
 
