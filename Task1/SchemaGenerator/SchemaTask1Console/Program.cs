@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SchemaTask1Console.EF;
 using SchemaTask1Console.Models;
@@ -23,20 +24,28 @@ namespace SchemaTask1Console {
                 .UseNpgsql($"Host=localhost;Database={DbName};Username=postgres;Password=admin")
                 .Options;
 
-        private static readonly List<Product> _products = new List<Product>();
-        private static readonly List<BoughtProduct> _boughtProducts = new List<BoughtProduct>();
-        private static readonly List<SoldProduct> _soldProducts = new List<SoldProduct>();
-        private static readonly List<Employee> _employees = new List<Employee>();
+        private static readonly List<Product> _productsGrocery = new List<Product>();
+        private static readonly List<Product> _productsSupplier = new List<Product>();
+
+        private static readonly List<BoughtProduct> _boughtProductsSupplier =
+            new List<BoughtProduct>();
+
+        private static readonly List<SoldProduct> _soldProductsGrocery = new List<SoldProduct>();
+        private static readonly List<Employee> _employeesGrocery = new List<Employee>();
+        private static readonly List<Employee> _employeesSupplier = new List<Employee>();
         private static readonly List<Supplier> _suppliers = new List<Supplier>();
         private static readonly List<Grocery> _groceries = new List<Grocery>();
 
         /*------------------------ METHODS REGION ------------------------*/
         public static void Main(string[] args) {
-            _products.AddRange(GenerateProducts(50));
-            _boughtProducts.AddRange(GenerateBoughtProducts(50));
-            _soldProducts.AddRange(GenerateSoldProducts(50));
-            _employees.AddRange(GenerateEmployees(20));
-            
+            _productsGrocery.AddRange(GenerateProducts(50));
+            _productsSupplier.AddRange(GenerateProducts(50));
+            _boughtProductsSupplier.AddRange(GenerateBoughtProducts(50));
+            _soldProductsGrocery.AddRange(GenerateSoldProducts(50));
+            _employeesGrocery.AddRange(GenerateEmployees(20));
+            _employeesSupplier.AddRange(GenerateEmployees(10));
+            _groceries.AddRange(GenerateGrocery(5));
+
             using (ApplicationContext context = new ApplicationContext(DbContextOptions)) {
                 PrepareDatabase(context);
 
@@ -89,6 +98,16 @@ namespace SchemaTask1Console {
                 yield return new Employee(
                     firstNames[index], LastNames[index], salary, dateTimeEmployee
                 );
+            }
+        }
+
+        private static IEnumerable<Grocery> GenerateGrocery(int numberOfGroceries) {
+            string[] addresses = File.ReadAllLines(AddressesPath);
+
+            for (int i = 0; i < numberOfGroceries; i++) {
+                (int index, _, _, _, _, _) = GenerateRandomValues(addresses.Length);
+                yield return new Grocery(addresses[index], _productsGrocery,
+                                         _soldProductsGrocery, _employeesGrocery);
             }
         }
 
