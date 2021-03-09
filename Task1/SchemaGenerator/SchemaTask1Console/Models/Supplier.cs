@@ -8,11 +8,9 @@ namespace SchemaTask1Console.Models {
         public string Name { get; private set; }
         public float GrossVehicleWeight { get; private set; }
         public Employee Employee { get; private set; }
-        public IEnumerable<Grocery> Groceries { get; private set; } = new List<Grocery>();
-        public IEnumerable<Product> AvailableProducts { get; private set; } = new List<Product>();
-
-        public IEnumerable<BoughtProduct> AllBoughtProducts { get; private set; } =
-            new List<BoughtProduct>();
+        public List<Grocery> Groceries { get; private set; }
+        public List<Product> AvailableProducts { get; private set; }
+        public List<BoughtProduct> AllBoughtProducts { get; private set; }
 
         /*------------------------ METHODS REGION ------------------------*/
         protected Supplier() {
@@ -23,10 +21,30 @@ namespace SchemaTask1Console.Models {
             GrossVehicleWeight = grossVehicleWeight;
         }
 
+        public Supplier(string name, float grossVehicleWeight, List<Grocery> groceries,
+                        List<Product> availableProducts, List<BoughtProduct> allBoughtProducts) {
+            Name = name;
+            GrossVehicleWeight = grossVehicleWeight;
+            Groceries = groceries;
+            AvailableProducts = availableProducts;
+            AllBoughtProducts = allBoughtProducts;
+        }
+
         public Supplier(string name, float grossVehicleWeight, Employee employee) {
             Name = name;
             GrossVehicleWeight = grossVehicleWeight;
             Employee = employee;
+        }
+
+        public Supplier(string name, float grossVehicleWeight, Employee employee,
+                        List<Grocery> groceries, List<Product> availableProducts,
+                        List<BoughtProduct> allBoughtProducts) {
+            Name = name;
+            GrossVehicleWeight = grossVehicleWeight;
+            Employee = employee;
+            Groceries = groceries;
+            AvailableProducts = availableProducts;
+            AllBoughtProducts = allBoughtProducts;
         }
 
         public override string ToString() {

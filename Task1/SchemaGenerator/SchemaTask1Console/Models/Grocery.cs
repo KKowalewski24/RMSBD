@@ -6,9 +6,9 @@ namespace SchemaTask1Console.Models {
 
         /*------------------------ FIELDS REGION ------------------------*/
         public string Address { get; private set; }
-        public IEnumerable<Product> AvailableProducts { get; private set; }
-        public IEnumerable<SoldProduct> AllSoldProducts { get; private set; }
-        public IEnumerable<Employee> Employees { get; private set; }
+        public List<Product> AvailableProducts { get; private set; }
+        public List<SoldProduct> AllSoldProducts { get; private set; }
+        public List<Employee> Employees { get; private set; }
         public Supplier Supplier { get; set; }
 
         /*------------------------ METHODS REGION ------------------------*/
@@ -19,8 +19,8 @@ namespace SchemaTask1Console.Models {
             Address = address;
         }
 
-        public Grocery(string address, IEnumerable<Product> availableProducts,
-                       IEnumerable<SoldProduct> allSoldProducts, IEnumerable<Employee> employees) {
+        public Grocery(string address, List<Product> availableProducts,
+                       List<SoldProduct> allSoldProducts, List<Employee> employees) {
             Address = address;
             AvailableProducts = availableProducts;
             AllSoldProducts = allSoldProducts;

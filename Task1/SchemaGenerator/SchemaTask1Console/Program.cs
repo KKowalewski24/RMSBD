@@ -106,13 +106,18 @@ namespace SchemaTask1Console {
 
             for (int i = 0; i < numberOfGroceries; i++) {
                 (int index, _, _, _, _, _) = GenerateRandomValues(addresses.Length);
-                yield return new Grocery(addresses[index], _productsGrocery,
-                                         _soldProductsGrocery, _employeesGrocery);
+                /*TODO ADD SPLITING LISTS*/
+                Grocery grocery = new Grocery(
+                    addresses[index],
+                    _productsGrocery,
+                    _soldProductsGrocery, _employeesGrocery
+                );
+                yield return grocery;
             }
         }
 
-        private static (int, int, int, DateTime, int, DateTime) GenerateRandomValues(
-            int arrayLength) {
+        private static (int, int, int, DateTime, int, DateTime)
+            GenerateRandomValues(int arrayLength) {
             int index = _random.Next(0, arrayLength);
             int amount = _random.Next(1, 25);
             int price = _random.Next(1, 20);
