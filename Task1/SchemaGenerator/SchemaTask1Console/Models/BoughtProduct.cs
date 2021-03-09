@@ -9,7 +9,7 @@ namespace SchemaTask1Console.Models {
         public float Amount { get; private set; }
         public decimal Price { get; private set; }
         public DateTime TransactionDate { get; private set; }
-        
+
         public Supplier Supplier { get; set; }
 
         /*------------------------ METHODS REGION ------------------------*/

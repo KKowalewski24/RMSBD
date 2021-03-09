@@ -139,7 +139,7 @@ namespace SchemaTask1Console {
             int amount = _random.Next(1, 25);
             int price = _random.Next(1, 20);
             DateTime dateTimeProduct = new RandomDateTime(2019, 2021).Next();
-            DateTime dateTimeEmployee = new RandomDateTime(2010, 2021).Next();
+            DateTime dateTimeEmployee = new RandomDateTime(2019, 2021).Next();
             int salary = _random.Next(1000, 8000);
             int grossVehicleWeight = _random.Next(300, 1500);
 
