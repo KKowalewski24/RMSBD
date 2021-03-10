@@ -5,23 +5,17 @@ AS
 $$
 BEGIN
     PERFORM * FROM groceries WHERE id = grocery_id;
-    IF NOT found THEN
-        RAISE NOTICE 'Passed grocery_id does not exist!';
-        RETURN;
-    END IF;
-
     PERFORM * FROM suppliers WHERE id = supplier_id;
-    IF NOT found THEN
-        RAISE NOTICE 'Passed supplier_id does not exist!';
-        RETURN;
-    END IF;
 
     INSERT INTO products (name, amount, groceryid, supplierid)
     VALUES (product_name, product_amount, grocery_id, supplier_id);
+EXCEPTION
+    WHEN FOREIGN_KEY_VIOLATION THEN
+        RAISE EXCEPTION 'Passed grocery_id or supplier_id does not exist!';
 END;
 $$;
 
-CALL add_product('Banana', 20, 1, 1);
+CALL add_product('Banana', 20, -5, 1);
 
 ---------------------------------------
 

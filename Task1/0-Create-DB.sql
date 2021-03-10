@@ -31,6 +31,7 @@ SELECT salary
 FROM employees;
 
 ---------------------------------------
+
 DELETE
 FROM suppliers;
 
@@ -45,4 +46,5 @@ FROM products;
 
 DELETE
 FROM groceries;
+
 ---------------------------------------
