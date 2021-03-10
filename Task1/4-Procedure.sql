@@ -62,11 +62,31 @@ BEGIN
 END;
 $$;
 
-CALL add_grocery('Politechniki 25', 2)
+CALL add_grocery('Politechniki 25', 2);
 
 ---------------------------------------
 
--- PROCEDURE TEMPLATE
+CREATE OR REPLACE PROCEDURE hire_employee_in_grocery(first_name TEXT, last_name TEXT,
+                                                     salary NUMERIC, grocery_id INTEGER)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM * FROM groceries WHERE id = grocery_id;
+    IF NOT found THEN
+        RAISE NOTICE 'Passed grocery_id does not exist!';
+        RETURN;
+    END IF;
+
+    INSERT INTO employees (firstname, lastname, salary, employmentdate, groceryid)
+    VALUES (first_name, last_name, salary, now(), grocery_id);
+END;
+$$;
+
+CALL hire_employee_in_grocery('Adam', 'Nowak', 3000, 1);
+
+---------------------------------------
+
 -- create or replace procedure procedure_name(parameter_list)
 -- language plpgsql
 -- as $$

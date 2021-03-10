@@ -21,6 +21,12 @@ FROM products;
 
 SELECT *
 FROM groceries;
+
+SELECT *
+FROM employees
+         INNER JOIN groceries g ON employees.groceryid = g.id
+ORDER BY g.id;
+
 ---------------------------------------
 DELETE
 FROM suppliers;
