@@ -49,6 +49,33 @@ SELECT count_price_sold_product_for_chosen_grocery(1);
 
 ---------------------------------------
 
+CREATE OR REPLACE FUNCTION make_salary_raise(new_salary REAL)
+    RETURNS INTEGER
+    LANGUAGE plpgsql
+AS
+$$
+DECLARE
+    number_of_employees_with_salary_raise INTEGER = 0;
+    salary_cursor CURSOR FOR SELECT id, firstname, lastname, salary
+                             FROM employees;
+BEGIN
+    FOR x IN salary_cursor
+        LOOP
+            number_of_employees_with_salary_raise =
+                    number_of_employees_with_salary_raise + 1;
+            UPDATE employees
+            SET salary = new_salary
+            WHERE id = x.id;
+        END LOOP;
+
+    RETURN number_of_employees_with_salary_raise;
+END;
+$$;
+
+SELECT make_salary_raise(100);
+
+---------------------------------------
+
 -- CREATE OR REPLACE FUNCTION function_name(PARAM_LIST)
 --     RETURNS RETURN_TYPE
 --     LANGUAGE plpgsql

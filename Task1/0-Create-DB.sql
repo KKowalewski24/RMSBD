@@ -27,6 +27,9 @@ FROM employees
          INNER JOIN groceries g ON employees.groceryid = g.id
 ORDER BY g.id;
 
+SELECT salary
+FROM employees;
+
 ---------------------------------------
 DELETE
 FROM suppliers;
