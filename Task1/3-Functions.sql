@@ -18,7 +18,7 @@ BEGIN
 END;
 $$;
 
-SELECT count_chosen_product('Lettuce1');
+SELECT count_chosen_product('Lettuce');
 
 -- Zliczanie kwoty sprzedanych produktów dla danego warzywniaka
 CREATE OR REPLACE FUNCTION count_price_sold_product_for_chosen_grocery(grocery_id INTEGER)

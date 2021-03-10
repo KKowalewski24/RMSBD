@@ -21,7 +21,7 @@ DELETE
 FROM employees
 WHERE id = 6;
 
-DROP TRIGGER add_salary_raise_trigger ON employees;
+-- DROP TRIGGER add_salary_raise_trigger ON employees;
 
 -- Gdy aktualizowany jest grocery to jego kopia jest
 -- umieszczana w tabeli groceries_history
@@ -49,7 +49,7 @@ UPDATE groceries
 SET address = 'new address'
 WHERE id = 4;
 
-DROP TRIGGER move_grocery_to_history_on_update_trigger ON groceries;
+-- DROP TRIGGER move_grocery_to_history_on_update_trigger ON groceries;
 
 -- Gdy produkt jest dodawany to wyswietlane są informacje o nim
 CREATE OR REPLACE FUNCTION print_info_on_product_add()
@@ -77,4 +77,4 @@ EXECUTE FUNCTION print_info_on_product_add();
 INSERT INTO products (name, amount, groceryid, supplierid)
 VALUES ('abc', 10, 1, 1);
 
-DROP TRIGGER print_info_on_product_add_trigger ON products
+-- DROP TRIGGER print_info_on_product_add_trigger ON products

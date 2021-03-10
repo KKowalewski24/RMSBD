@@ -16,7 +16,7 @@ EXCEPTION
 END;
 $$;
 
-CALL add_product('Banana', 20, -5, 1);
+CALL add_product('Banana', 20, 2, 1);
 
 -- Dodawanie dostawcy z ifem
 CREATE OR REPLACE PROCEDURE add_supplier(name TEXT, gross_vehicle_weight REAL,
