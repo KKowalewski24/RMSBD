@@ -25,18 +25,6 @@ CALL add_product('Banana', 20, 1, 1);
 
 ---------------------------------------
 
-CREATE OR REPLACE PROCEDURE add_employee(first_name TEXT, last_name TEXT, salary NUMERIC)
-    LANGUAGE SQL
-AS
-$$
-INSERT INTO employees (firstname, lastname, salary)
-VALUES (first_name, last_name, salary);
-$$;
-
-CALL add_employee('Adam', 'Nowak', 3000);
-
----------------------------------------
-
 CREATE OR REPLACE PROCEDURE add_supplier(name TEXT, gross_vehicle_weight REAL,
                                          employee_id INTEGER)
     LANGUAGE plpgsql
@@ -59,11 +47,19 @@ CALL add_supplier('Third supplier', 2500, 2);
 ---------------------------------------
 
 CREATE OR REPLACE PROCEDURE add_grocery(grocery_address TEXT, supplier_id INTEGER)
-    LANGUAGE SQL
+    LANGUAGE plpgsql
 AS
 $$
-INSERT INTO groceries (address, supplierid)
-VALUES (grocery_address, supplier_id);
+BEGIN
+    PERFORM * FROM suppliers WHERE id = supplier_id;
+    IF NOT found THEN
+        RAISE NOTICE 'Passed supplier_id does not exist!';
+        RETURN;
+    END IF;
+
+    INSERT INTO groceries (address, supplierid)
+    VALUES (grocery_address, supplier_id);
+END;
 $$;
 
 CALL add_grocery('Politechniki 25', 2)
