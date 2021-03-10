@@ -1,3 +1,4 @@
+-- Zliczanie liczby produktów o danej nazwie
 CREATE OR REPLACE FUNCTION count_chosen_product(product_name TEXT)
     RETURNS INTEGER
     LANGUAGE plpgsql
@@ -19,8 +20,7 @@ $$;
 
 SELECT count_chosen_product('Lettuce1');
 
----------------------------------------
-
+-- Zliczanie kwoty sprzedanych produktów dla danego warzywniaka
 CREATE OR REPLACE FUNCTION count_price_sold_product_for_chosen_grocery(grocery_id INTEGER)
     RETURNS REAL
     LANGUAGE plpgsql
@@ -47,8 +47,7 @@ $$;
 
 SELECT count_price_sold_product_for_chosen_grocery(1);
 
----------------------------------------
-
+-- Dawanie podwyżki wszystkim pracownikom poniżęj podanej kwoty
 CREATE OR REPLACE FUNCTION make_salary_raise(new_salary REAL)
     RETURNS INTEGER
     LANGUAGE plpgsql

@@ -1,3 +1,4 @@
+-- Dodawanie produktu z exception
 CREATE OR REPLACE PROCEDURE add_product(product_name TEXT, product_amount REAL,
                                         grocery_id INTEGER, supplier_id INTEGER)
     LANGUAGE plpgsql
@@ -17,8 +18,7 @@ $$;
 
 CALL add_product('Banana', 20, -5, 1);
 
----------------------------------------
-
+-- Dodawanie dostawcy z ifem
 CREATE OR REPLACE PROCEDURE add_supplier(name TEXT, gross_vehicle_weight REAL,
                                          employee_id INTEGER)
     LANGUAGE plpgsql
@@ -38,8 +38,7 @@ $$;
 
 CALL add_supplier('Third supplier', 2500, 2);
 
----------------------------------------
-
+-- Dodawanie warzywniaka
 CREATE OR REPLACE PROCEDURE add_grocery(grocery_address TEXT, supplier_id INTEGER)
     LANGUAGE plpgsql
 AS
@@ -58,8 +57,7 @@ $$;
 
 CALL add_grocery('Politechniki 25', 2);
 
----------------------------------------
-
+-- Zatrudnianie pracowanika w warzywniaku - data zatrudnienia teraz
 CREATE OR REPLACE PROCEDURE hire_employee_in_grocery(first_name TEXT, last_name TEXT,
                                                      salary NUMERIC, grocery_id INTEGER)
     LANGUAGE plpgsql
