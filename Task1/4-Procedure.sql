@@ -1,14 +1,62 @@
--- trigget 1 na sprawdzenie - złozony checker - jak dodajemy produkt do soildPorcudct - nie moze my 
--- tego zrobic jezzeli cena za kg jesrt mniej nie ostatenio kupionego produktu tej samej nazwy - w boguht product
+CREATE OR REPLACE PROCEDURE add_product(product_name TEXT, product_amount INTEGER,
+                                        grocery_id INTEGER, supplier_id INTEGER)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM * FROM groceries WHERE id = grocery_id;
+    IF NOT found THEN
+        RAISE NOTICE 'Passed grocery_id does not exist!';
+        RETURN;
+    END IF;
 
--- trigger 2 - gdy dodajemy produkt do warzywnia lub dostawcy i już jest to sumujemy - robimy update
--- a jak nie ma to dodajemy
+    PERFORM * FROM suppliers WHERE id = supplier_id;
+    IF NOT found THEN
+        RAISE NOTICE 'Passed supplier_id does not exist!';
+        RETURN;
+    END IF;
 
--- trigger 3 jezeli dodamy do bought to musi sie dodać do product 
-    
--- trigger 4 jezeli dodamy do sold to musi sie usunac z product 
+    INSERT INTO products (name, amount, groceryid, supplierid)
+    VALUES (product_name, product_amount, grocery_id, supplier_id);
 
--- functions
--- zlicznanie saldo dla dostawcy boughtprod - soldproduct - pensja dla employees 
+END;
+$$;
 
--- scheduler co 3 miesiace podwyzka - data zatrdunienia u pracownika
+CALL add_product('Banana', 20, 1, 1);
+
+---------------------------------------
+
+CREATE OR REPLACE PROCEDURE add_employee(first_name TEXT, last_name TEXT, salary NUMERIC)
+    LANGUAGE SQL
+AS
+$$
+INSERT INTO employees (firstname, lastname, salary)
+VALUES (first_name, last_name, salary);
+$$;
+
+CALL add_employee('Adam', 'Nowak', 3000);
+
+---------------------------------------
+
+CREATE OR REPLACE PROCEDURE add_supplier(name TEXT, gross_vehicle_weight REAL,
+                                         employee_id INTEGER)
+    LANGUAGE SQL
+AS
+$$
+INSERT INTO suppliers (name, grossvehicleweight, employeeid)
+VALUES (name, gross_vehicle_weight, employee_id);
+$$;
+
+CALL add_supplier('Third supplier', 2500, 2);
+
+---------------------------------------
+
+CREATE OR REPLACE PROCEDURE add_grocery(grocery_address TEXT, supplier_id INTEGER)
+    LANGUAGE SQL
+AS
+$$
+INSERT INTO groceries (address, supplierid)
+VALUES (grocery_address, supplier_id);
+$$;
+
+CALL add_grocery('Politechniki 25', 2)
