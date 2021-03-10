@@ -61,18 +61,20 @@ DECLARE
 BEGIN
     FOR x IN salary_cursor
         LOOP
-            number_of_employees_with_salary_raise =
-                    number_of_employees_with_salary_raise + 1;
-            UPDATE employees
-            SET salary = new_salary
-            WHERE id = x.id;
+            IF new_salary > x.salary THEN
+                number_of_employees_with_salary_raise =
+                        number_of_employees_with_salary_raise + 1;
+                UPDATE employees
+                SET salary = new_salary
+                WHERE id = x.id;
+            END IF;
         END LOOP;
 
     RETURN number_of_employees_with_salary_raise;
 END;
 $$;
 
-SELECT make_salary_raise(100);
+SELECT make_salary_raise(5000);
 
 ---------------------------------------
 
