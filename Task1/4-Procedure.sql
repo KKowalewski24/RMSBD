@@ -67,7 +67,7 @@ CALL add_grocery('Politechniki 25', 2)
 ---------------------------------------
 
 -- PROCEDURE TEMPLATE
--- create [or replace] procedure procedure_name(parameter_list)
+-- create or replace procedure procedure_name(parameter_list)
 -- language plpgsql
 -- as $$
 -- declare
