@@ -1,0 +1,82 @@
+create table songs (
+    id uuid primary key,
+    samples bytea,
+    sample_rate integer,
+    channels integer,
+    bit_rate integer,
+    codec text
+);
+
+create table songs_external_metadata (
+    id uuid primary key,
+    foreign key (id) references songs(id),
+    title text,
+    artist text,
+    album text,
+    year integer
+);
+
+create table songs_features (
+    id uuid primary key,
+    foreign key (id) references songs(id),
+    length real,
+    average_loudness real,
+    bpm real,
+    hpcp real[],
+    chords_histogram real[]
+);
+
+create table songs_tags (
+    id uuid primary key,
+    foreign key (id) references songs(id),
+    rock real,
+    pop real,
+    alternative real,
+    indie real,
+    electronic real,
+    female_vocalists real,
+    dance real,
+    the_00s real,
+    alternative_rock real,
+    jazz real,
+    beautiful real,
+    metal real,
+    chillout real,
+    male_vocalists real,
+    classi_crock real,
+    soul real,
+    indie_rock real,
+    mellow real,
+    electronica real,
+    the_80s real,
+    folk real,
+    the_90s real,
+    chill real,
+    instrumental real,
+    punk real,
+    oldies real,
+    blues real,
+    hard_rock real,
+    ambient real,
+    acoustic real,
+    experimental real,
+    female_vocalist real,
+    guitar real,
+    hiphop real,
+    the_70s real,
+    party real,
+    country real,
+    easy_listening real,
+    sexy real,
+    catchy real,
+    funk real,
+    electro real,
+    heavy_metal real,
+    progressive_rock real,
+    the_60s real, 
+    rnb real, 
+    indie_pop real, 
+    sad real, 
+    house real, 
+    happy real
+);
