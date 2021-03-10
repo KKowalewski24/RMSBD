@@ -23,6 +23,9 @@ SELECT *
 FROM groceries;
 
 SELECT *
+FROM grocerieshistory;
+
+SELECT *
 FROM employees
          INNER JOIN groceries g ON employees.groceryid = g.id
 ORDER BY g.id;

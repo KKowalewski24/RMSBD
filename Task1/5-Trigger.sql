@@ -1,15 +1,3 @@
--- trigget 1 na sprawdzenie - złozony checker - jak dodajemy produkt do soildPorcudct - nie moze my
--- tego zrobic jezzeli cena za kg jesrt mniej nie ostatenio kupionego produktu tej samej nazwy - w boguht product
-
--- trigger 2 - gdy dodajemy produkt do warzywnia lub dostawcy i już jest to sumujemy - robimy update
--- a jak nie ma to dodajemy
-
--- trigger 3 jezeli dodamy do bought to musi sie dodać do product
-
--- trigger 4 jezeli dodamy do sold to musi sie usunac z product
-
--- scheduler co 3 miesiace podwyzka - data zatrdunienia u pracownika
-
 -- Gdy zwalniany jest jakiś pracownik, reszta praconików
 -- dostaje 10% podwyżki aby chcieli nadal pracować
 CREATE OR REPLACE FUNCTION add_salary_raise()
@@ -31,4 +19,33 @@ EXECUTE FUNCTION add_salary_raise();
 
 DELETE
 FROM employees
+WHERE id = 6;
+
+DROP TRIGGER add_salary_raise_trigger ON employees;
+
+-- Gdy aktualizowany jest grocery to jego kopia jest umieszczana w tabeli groceries_history
+CREATE OR REPLACE FUNCTION move_grocery_to_history_on_update()
+    RETURNS TRIGGER
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    INSERT INTO grocerieshistory(address)
+    SELECT address
+    FROM groceries
+    WHERE id = new.id;
+    RETURN new;
+END;
+$$;
+
+CREATE TRIGGER move_grocery_to_history_on_update_trigger
+    BEFORE UPDATE
+    ON groceries
+    FOR EACH ROW
+EXECUTE FUNCTION move_grocery_to_history_on_update();
+
+UPDATE groceries
+SET address = 'new address'
 WHERE id = 4;
+
+DROP TRIGGER move_grocery_to_history_on_update_trigger ON groceries;
