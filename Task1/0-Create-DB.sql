@@ -33,6 +33,11 @@ ORDER BY g.id;
 SELECT salary
 FROM employees;
 
+SELECT *
+FROM suppliers
+         LEFT JOIN products p ON suppliers.id = p.supplierid
+WHERE suppliers.id = 1;
+
 ---------------------------------------
 
 DELETE
