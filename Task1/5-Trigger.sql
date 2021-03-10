@@ -8,7 +8,27 @@
 
 -- trigger 4 jezeli dodamy do sold to musi sie usunac z product
 
--- functions
--- zlicznanie saldo dla dostawcy boughtprod - soldproduct - pensja dla employees
-
 -- scheduler co 3 miesiace podwyzka - data zatrdunienia u pracownika
+
+-- Gdy zwalniany jest jakiś pracownik, reszta praconików
+-- dostaje 10% podwyżki aby chcieli nadal pracować
+CREATE OR REPLACE FUNCTION add_salary_raise()
+    RETURNS TRIGGER
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    UPDATE employees SET salary = salary * 1.1;
+    RETURN new;
+END;
+$$;
+
+CREATE TRIGGER add_salary_raise_trigger
+    AFTER DELETE
+    ON employees
+    FOR EACH ROW
+EXECUTE FUNCTION add_salary_raise();
+
+DELETE
+FROM employees
+WHERE id = 4;
