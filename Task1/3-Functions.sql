@@ -38,7 +38,7 @@ BEGIN
     SELECT sum(s.price)
     INTO summed_prices
     FROM groceries
-             LEFT JOIN soldproduct s ON groceries.id = s.groceryid
+             INNER JOIN soldproduct s ON groceries.id = s.groceryid
     WHERE groceries.id = grocery_id;
 
     RETURN summed_prices;
