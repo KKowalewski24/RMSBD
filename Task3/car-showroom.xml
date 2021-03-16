@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<car_showroom>
+
+    <brands>
+        <brand brand_id="brand_1">Audi</brand>
+        <brand brand_id="brand_2">Bentley</brand>
+        <brand brand_id="brand_3">Bugatti</brand>
+        <brand brand_id="brand_4">Lamborghini</brand>
+        <brand brand_id="brand_5">Porsche</brand>
+        <brand brand_id="brand_6">Seat</brand>
+        <brand brand_id="brand_7">Skoda</brand>
+        <brand brand_id="brand_8">Volkswagen</brand>
+    </brands>
+
+</car_showroom>
