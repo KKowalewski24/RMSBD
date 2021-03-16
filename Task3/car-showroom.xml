@@ -13,4 +13,18 @@
         <brand brand_id="brand_8">Volkswagen</brand>
     </brands>
 
+    <vehicle_types>
+        <vehicle_type vehicle_id="vehicle_1">Sedan</vehicle_type>
+        <vehicle_type vehicle_id="vehicle_2">Kombi</vehicle_type>
+        <vehicle_type vehicle_id="vehicle_3">Hatchback</vehicle_type>
+        <vehicle_type vehicle_id="vehicle_4">SUV</vehicle_type>
+        <vehicle_type vehicle_id="vehicle_5">Coupe</vehicle_type>
+        <vehicle_type vehicle_id="vehicle_6">Sports Car</vehicle_type>
+    </vehicle_types>
+
+    <engine_types>
+        <engine_type engine_id="engine_1">petrol</engine_type>
+        <engine_type engine_id="engine_2">diesel</engine_type>
+    </engine_types>
+
 </car_showroom>
