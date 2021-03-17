@@ -22,7 +22,7 @@ END;
 $$;
 
 -- Insert all data into single column
-INSERT INTO car_showroom_single_row (xml_data)
+INSERT INTO car_showroom_single_column (xml_data)
 VALUES (get_xml_file_content())
 
 ---------------------------------------
@@ -51,5 +51,5 @@ VALUES (get_xml_file_content())
 -- END;
 -- $f$;
 --
--- INSERT INTO car_showroom_single_row (xml_data)
+-- INSERT INTO car_showroom_single_column (xml_data)
 -- VALUES (xml_import_low_level('C:\Coding\RMSBD\Task3\car-showroom-minified.xml'));

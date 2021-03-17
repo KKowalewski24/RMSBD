@@ -6,9 +6,9 @@ DROP DATABASE car_showroom_db;
 ---------------------------------------
 
 SELECT *
-FROM car_showroom_single_row;
+FROM car_showroom_single_column;
 
 ---------------------------------------
 
 DELETE
-FROM car_showroom_single_row;
+FROM car_showroom_single_column;
