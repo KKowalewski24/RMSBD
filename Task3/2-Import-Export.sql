@@ -22,4 +22,17 @@ END;
 $f$;
 
 INSERT INTO car_showroom (xml_data)
-VALUES (xml_import('C:\Coding\RMSBD\Task3\car-showroom.xml'));
+VALUES (xml_import('C:\Coding\RMSBD\Task3\car-showroom-minified.xml'));
+
+---------------------------------------
+
+CREATE OR REPLACE PROCEDURE xml_export_new()
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    COPY (SELECT xml_data FROM car_showroom) TO 'C:\Coding\RMSBD\Task3\car-showroom-out.xml';
+END;
+$$;
+
+CALL xml_export_new()
