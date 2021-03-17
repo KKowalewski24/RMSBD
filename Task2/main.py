@@ -68,7 +68,8 @@ def import_song(connection, filename, title, album, artist, year):
             (uuid, title, artist, album, year))
         cursor.execute(
             "insert into songs_features values (%s, %s, %s, %s, %s, %s, %s, %s)",
-            (uuid, length, average_loudness, bpm, hpcp, chords_histogram, tags, tags_intensity))
+            (uuid, length, average_loudness, bpm, hpcp, chords_histogram, tags,
+             tags_intensity))
     connection.commit()
 
     print("\tDONE")
@@ -171,7 +172,6 @@ if __name__ == '__main__':
     list_parser.add_argument(
         '--tag',
         action='append',
-        nargs='?',
         choices=('rock', 'pop', 'alternative', 'indie', 'electronic',
                  'female_vocalists', 'dance', 'the_00s', 'alternative_rock',
                  'jazz', 'beautiful', 'metal', 'chillout', 'male_vocalists',
@@ -183,8 +183,8 @@ if __name__ == '__main__':
                  'catchy', 'funk', 'electro', 'heavy_metal',
                  'progressive_rock', 'the_60s', 'rnb', 'indie_pop', 'sad',
                  'house', 'happy'))
-    list_parser.add_argument('--length-range', nargs=2, type=float)
-    list_parser.add_argument('--bpm-range', nargs=2, type=float)
+    list_parser.add_argument('--length_range', nargs=2, type=float)
+    list_parser.add_argument('--bpm_range', nargs=2, type=float)
 
     find_similar_parser = argparse.ArgumentParser(
         description="Find similar songs from audio database",
@@ -209,8 +209,11 @@ if __name__ == '__main__':
                     args.sample_rate, args.bitrate)
 
     if main_args.action == "list":
+        args = list_parser.parse_args(sys.argv[2:])
         with connection.cursor() as cursor:
-            cursor.execute("select * from list_songs()")
+            cursor.execute("select * from list_songs(%s, %s, %s, %s, %s, %s)",
+                           (args.artist, args.album, args.year,
+                            args.length_range, args.bpm_range, args.tag))
             for song in cursor.fetchall():
                 print(song)
 
