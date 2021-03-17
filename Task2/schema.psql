@@ -43,7 +43,7 @@ create table songs_tags (
     metal real,
     chillout real,
     male_vocalists real,
-    classi_crock real,
+    classic_rock real,
     soul real,
     indie_rock real,
     mellow real,
