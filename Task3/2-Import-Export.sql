@@ -1,9 +1,3 @@
---
--- The absolute path name of the input or output file. Windows users
--- might need to use an E'' string and double any backslashes
--- used in the path name.
---
-
 CREATE OR REPLACE FUNCTION get_xml_file_content()
     RETURNS XML
     LANGUAGE plpgsql
@@ -16,13 +10,13 @@ BEGIN
         xml_content XML
     );
 
+    -- There is no other option - path must be absolute and it cannot passed as parameter
     COPY temp_content FROM 'C:\Coding\RMSBD\Task3\car-showroom-minified.xml';
     content = (
                   SELECT xml_content
                   FROM temp_content
               );
     DROP TABLE temp_content;
-
     RETURN content;
 END;
 $$;
@@ -31,19 +25,7 @@ SELECT get_xml_file_content();
 
 ---------------------------------------
 
-CREATE OR REPLACE PROCEDURE xml_export()
-    LANGUAGE plpgsql
-AS
-$$
-BEGIN
-    COPY (SELECT xml_data FROM car_showroom) TO 'C:\Coding\RMSBD\Task3\car-showroom-out.xml';
-END;
-$$;
-
-CALL xml_export();
-
----------------------------------------
--- DO NOT DELETE THIS
+-- TODO DO NOT DELETE THIS
 -- CREATE OR REPLACE FUNCTION xml_import_low_level(filename TEXT)
 --     RETURNS XML
 --     VOLATILE
