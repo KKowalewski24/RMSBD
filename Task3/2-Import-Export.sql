@@ -4,26 +4,30 @@
 -- used in the path name.
 --
 
-CREATE OR REPLACE PROCEDURE xml_import()
+CREATE OR REPLACE FUNCTION get_xml_file_content()
+    RETURNS XML
     LANGUAGE plpgsql
 AS
 $$
+DECLARE
+    content XML;
 BEGIN
     CREATE TEMPORARY TABLE IF NOT EXISTS temp_content (
-        content XML
+        xml_content XML
     );
 
     COPY temp_content FROM 'C:\Coding\RMSBD\Task3\car-showroom-minified.xml';
-
-    INSERT INTO car_showroom (xml_data)
-    SELECT *
-    FROM temp_content;
-
+    content = (
+                  SELECT xml_content
+                  FROM temp_content
+              );
     DROP TABLE temp_content;
+
+    RETURN content;
 END;
 $$;
 
-CALL xml_import();
+SELECT get_xml_file_content();
 
 ---------------------------------------
 
