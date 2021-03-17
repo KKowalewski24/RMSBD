@@ -6,6 +6,7 @@ import glob
 import sys
 import argparse
 import essentia
+import pyaudio
 essentia.log.infoActive = False
 essentia.log.warningActive = False
 import essentia.standard as es
@@ -109,13 +110,36 @@ def export_song(connection, uuid, filename, format, sample_rate, bitrate):
     print("\tDONE")
 
 
+def play_song(connection, uuid):
+    print("Playing", uuid)
+
+    print("\tloading from database...")
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "select samples, sample_rate, channels from songs where id = %s",
+            (uuid, ))
+        samples, sample_rate, channels = cursor.fetchone()
+    samples = np.reshape(np.frombuffer(samples, dtype=np.float32), (-1, 2))
+
+    print("\tplaying...")
+    stream = pyaudio.PyAudio().open(rate=sample_rate,
+                                    channels=channels,
+                                    format=pyaudio.paFloat32,
+                                    output=True)
+    stream.write(samples)
+    stream.stop_stream()
+    stream.close()
+
+    print("\tDONE")
+
+
 if __name__ == '__main__':
     connection = connect_to_database()
 
     main_parser = argparse.ArgumentParser(description="Audio database client")
     main_parser.add_argument("action",
                              choices=("import", "export", "list",
-                                      "find_similar"))
+                                      "find_similar", "play"))
     main_args = main_parser.parse_args(sys.argv[1:2])
 
     import_parser = argparse.ArgumentParser(
@@ -168,6 +192,10 @@ if __name__ == '__main__':
         description="Find similar songs from audio database",
         prog=sys.argv[0] + " find_similar")
 
+    play_parser = argparse.ArgumentParser(description="Play selected song",
+                                          prog=sys.argv[0] + " play")
+    play_parser.add_argument("id")
+
     if main_args.action == "import":
         args = import_parser.parse_args(sys.argv[2:])
         if os.path.isfile(args.filename):
@@ -187,3 +215,7 @@ if __name__ == '__main__':
             cursor.execute("select * from list_songs()")
             for song in cursor.fetchall():
                 print(song)
+
+    if main_args.action == "play":
+        args = play_parser.parse_args(sys.argv[2:])
+        play_song(connection, args.id)
