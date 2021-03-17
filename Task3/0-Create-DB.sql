@@ -4,9 +4,11 @@ CREATE DATABASE car_showroom_db
 DROP DATABASE car_showroom_db;
 
 ---------------------------------------
+
 SELECT *
 FROM car_showroom;
 
 ---------------------------------------
+
 DELETE
 FROM car_showroom;

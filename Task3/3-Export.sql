@@ -3,7 +3,7 @@ CREATE OR REPLACE PROCEDURE xml_export()
 AS
 $$
 BEGIN
-    COPY (SELECT xml_data FROM car_showroom) TO 'C:\Coding\RMSBD\Task3\car-showroom-out.xml';
+    COPY (SELECT xml_data FROM car_showroom_single_row) TO 'C:\Coding\RMSBD\Task3\car-showroom-out.xml';
 END;
 $$;
 
