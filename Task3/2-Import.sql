@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION get_xml_file_content()
+CREATE OR REPLACE FUNCTION get_xml_file_content(filepath TEXT)
     RETURNS XML
     LANGUAGE plpgsql
 AS
@@ -11,7 +11,7 @@ BEGIN
     );
 
     -- There is no other option - path must be absolute and it cannot passed as parameter
-    COPY temp_content FROM 'C:\Coding\RMSBD\Task3\car-showroom-minified.xml';
+    EXECUTE format('COPY temp_content FROM %L ', filepath);
     content = (
                   SELECT xml_content
                   FROM temp_content
@@ -23,7 +23,7 @@ $$;
 
 -- Insert all data into single column
 INSERT INTO car_showroom_single_column (xml_data)
-VALUES (get_xml_file_content())
+VALUES (get_xml_file_content('C:\Coding\RMSBD\Task3\car-showroom-minified.xml'))
 
 ---------------------------------------
 
