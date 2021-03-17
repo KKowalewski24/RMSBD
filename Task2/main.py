@@ -53,8 +53,9 @@ def import_song(connection, filename, title, album, artist, year):
     chords_histogram = features['tonal.chords_histogram'].tolist()
 
     print("\ttagging...")
-    taggram, _, _ = extractor(filename, model='MSD_musicnn')
-    tags = np.average(taggram, axis=0).tolist()
+    taggram, tags_names, _ = extractor(filename, model='MSD_musicnn')
+    tags_intensity = np.average(taggram, axis=0).tolist()
+    tags = (np.array(tags_names)[np.argsort(tags_intensity)[-3:]]).tolist()
 
     print("\tinserting to database...")
     with connection.cursor() as cursor:
@@ -66,11 +67,8 @@ def import_song(connection, filename, title, album, artist, year):
             "insert into songs_external_metadata values (%s, %s, %s, %s, %s)",
             (uuid, title, artist, album, year))
         cursor.execute(
-            "insert into songs_features values (%s, %s, %s, %s, %s, %s)",
-            (uuid, length, average_loudness, bpm, hpcp, chords_histogram))
-        cursor.execute(
-            "insert into songs_tags values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-            [uuid] + tags)
+            "insert into songs_features values (%s, %s, %s, %s, %s, %s, %s, %s)",
+            (uuid, length, average_loudness, bpm, hpcp, chords_histogram, tags, tags_intensity))
     connection.commit()
 
     print("\tDONE")
