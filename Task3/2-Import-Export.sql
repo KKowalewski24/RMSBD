@@ -21,5 +21,5 @@ BEGIN
 END;
 $f$;
 
-INSERT INTO xml_file (xml_data)
+INSERT INTO car_showroom (xml_data)
 VALUES (xml_import('C:\Coding\RMSBD\Task3\car-showroom.xml'));
