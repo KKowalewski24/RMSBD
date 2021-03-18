@@ -109,3 +109,35 @@ $$;
 
 SELECT *
 FROM get_cars_chosen_vehicle_type('SUV');
+
+-- Display chosen cars based on engine_type name
+CREATE OR REPLACE FUNCTION get_cars_chosen_engine_type(chosen_engine_type_name TEXT)
+    RETURNS TABLE (
+        brand_name        TEXT,
+        vehicle_type_name TEXT,
+        engine_type_name  TEXT,
+        model             TEXT,
+        production_year   TEXT,
+        price             TEXT
+    )
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM get_all_engine_types()
+    WHERE get_all_engine_types.engine_type_name = chosen_engine_type_name;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_engine_type_name does not exist!';
+    ELSE
+        RETURN QUERY SELECT *
+                     FROM get_all_data() AS data
+                     WHERE data.engine_type_name = chosen_engine_type_name;
+
+    END IF;
+END;
+$$;
+
+SELECT *
+FROM get_cars_chosen_engine_type('diesel');
