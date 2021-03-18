@@ -1,19 +1,19 @@
 -- Display All Cars - fetch all data
 CREATE OR REPLACE FUNCTION get_all_data()
     RETURNS TABLE (
-        model             TEXT,
-        production_year   TEXT,
-        price             TEXT,
         brand_name        TEXT,
         vehicle_type_name TEXT,
-        engine_type_name  TEXT
+        engine_type_name  TEXT,
+        model             TEXT,
+        production_year   TEXT,
+        price             TEXT
     )
     LANGUAGE plpgsql
 AS
 $$
 BEGIN
-    RETURN QUERY SELECT car.model, car.production_year, car.price, brand.brand_name,
-                        vehicle_type.vehicle_type_name, engine_type.engine_name
+    RETURN QUERY SELECT brand.brand_name, vehicle_type.vehicle_type_name,
+                        engine_type.engine_name, car.model, car.production_year, car.price
                  FROM car_showroom_single_column,
                       XMLTABLE('/car_showroom/brands/brand' PASSING xml_data
                                COLUMNS
@@ -62,9 +62,15 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_brand(chosen_brand_name TEXT)
 AS
 $$
 BEGIN
-    RETURN QUERY SELECT *
-                 FROM get_all_data() AS data
-                 WHERE data.brand_name = chosen_brand_name;
+    PERFORM * FROM get_all_brands() WHERE get_all_brands.brand_name = chosen_brand_name;
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_brand_name does not exist!';
+    ELSE
+        RETURN QUERY SELECT *
+                     FROM get_all_data() AS data
+                     WHERE data.brand_name = chosen_brand_name;
+
+    END IF;
 END;
 $$;
 
