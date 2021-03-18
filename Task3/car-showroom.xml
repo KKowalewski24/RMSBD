@@ -98,7 +98,7 @@
             <production_year>2018</production_year>
             <price>650000</price>
         </car>
-        <car brand_id="brand_5" vehicle_type_id="vehicle_" engine_id="engine_1">
+        <car brand_id="brand_5" vehicle_type_id="vehicle_5" engine_id="engine_1">
             <model>718 Cayman GT4</model>
             <production_year>2020</production_year>
             <price>450000</price>
