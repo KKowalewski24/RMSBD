@@ -3,22 +3,54 @@
 -- https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/
 
 -- Display Brands
-SELECT xmltable.*
-FROM car_showroom_single_column,
-    XMLTABLE('/car_showroom/brands/brand' PASSING xml_data
-             COLUMNS
-                 brand_id TEXT PATH '@brand_id',
-                 brand_name TEXT PATH '.' NOT NULL
-        );
+CREATE OR REPLACE FUNCTION get_all_brands()
+    RETURNS TABLE (
+        brand_id   TEXT,
+        brand_name TEXT
+    )
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    RETURN QUERY
+        SELECT xmltable.*
+        FROM car_showroom_single_column,
+            XMLTABLE('/car_showroom/brands/brand' PASSING xml_data
+                     COLUMNS
+                         brand_id TEXT PATH '@brand_id',
+                         brand_name TEXT PATH '.' NOT NULL
+                );
+END;
+$$;
+
+SELECT *
+FROM get_all_brands();
+
 
 -- Display Vehicle Types
-SELECT xmltable.*
-FROM car_showroom_single_column,
-    XMLTABLE('/car_showroom/vehicle_types/vehicle_type' PASSING xml_data
-             COLUMNS
-                 vehicle_type_id TEXT PATH '@vehicle_type_id',
-                 vehicle_type_name TEXT PATH '.' NOT NULL
-        );
+CREATE OR REPLACE FUNCTION get_all_vehicle_types()
+    RETURNS TABLE (
+        vehicle_type_id   TEXT,
+        vehicle_type_name TEXT
+    )
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    RETURN QUERY
+        SELECT xmltable.*
+        FROM car_showroom_single_column,
+            XMLTABLE('/car_showroom/vehicle_types/vehicle_type' PASSING xml_data
+                     COLUMNS
+                         vehicle_type_id TEXT PATH '@vehicle_type_id',
+                         vehicle_type_name TEXT PATH '.' NOT NULL
+                );
+END;
+$$;
+
+SELECT *
+FROM get_all_vehicle_types();
+
 
 -- Display Engine Types
 SELECT xmltable.*
