@@ -53,10 +53,10 @@ FROM get_all_vehicle_types();
 
 
 -- Display Engine Types
-CREATE OR REPLACE FUNCTION get_all_engines()
+CREATE OR REPLACE FUNCTION get_all_engine_types()
     RETURNS TABLE (
         engine_id   TEXT,
-        engine_name TEXT
+        engine_type_name TEXT
     )
     LANGUAGE plpgsql
 AS
@@ -68,13 +68,13 @@ BEGIN
             XMLTABLE('/car_showroom/engine_types/engine_type' PASSING xml_data
                      COLUMNS
                          engine_id TEXT PATH '@engine_id' NOT NULL,
-                         engine_name TEXT PATH '.' NOT NULL
+                         engine_type_name TEXT PATH '.' NOT NULL
                 );
 END;
 $$;
 
 SELECT *
-FROM get_all_engines();
+FROM get_all_engine_types();
 
 
 -- Display All Data - only ID

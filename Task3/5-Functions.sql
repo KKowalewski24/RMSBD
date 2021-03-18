@@ -13,7 +13,8 @@ AS
 $$
 BEGIN
     RETURN QUERY SELECT brand.brand_name, vehicle_type.vehicle_type_name,
-                        engine_type.engine_name, car.model, car.production_year, car.price
+                        engine_type.engine_type_name, car.model, car.production_year,
+                        car.price
                  FROM car_showroom_single_column,
                       XMLTABLE('/car_showroom/brands/brand' PASSING xml_data
                                COLUMNS
@@ -28,7 +29,7 @@ BEGIN
                       XMLTABLE('/car_showroom/engine_types/engine_type' PASSING xml_data
                                COLUMNS
                                    engine_id TEXT PATH '@engine_id' NOT NULL,
-                                   engine_name TEXT PATH '.' NOT NULL
+                                   engine_type_name TEXT PATH '.' NOT NULL
                           ) engine_type,
                       XMLTABLE('/car_showroom/cars/car' PASSING xml_data
                                COLUMNS
