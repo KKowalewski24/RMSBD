@@ -3,48 +3,24 @@
 <car_showroom>
 
     <brands>
-        <brand brand_id="brand_1">
-            <name>Audi</name>
-        </brand>
-        <brand brand_id="brand_2">
-            <name>Seat</name>
-        </brand>
-        <brand brand_id="brand_3">
-            <name>Skoda</name>
-        </brand>
-        <brand brand_id="brand_4">
-            <name>Volkswagen</name>
-        </brand>
-        <brand brand_id="brand_5">
-            <name>Porsche</name>
-        </brand>
+        <brand brand_id="brand_1">Audi</brand>
+        <brand brand_id="brand_2">Seat</brand>
+        <brand brand_id="brand_3">Skoda</brand>
+        <brand brand_id="brand_4">Volkswagen</brand>
+        <brand brand_id="brand_5">Porsche</brand>
     </brands>
 
     <vehicle_types>
-        <vehicle_type vehicle_type_id="vehicle_1">
-            <name>Sedan</name>
-        </vehicle_type>
-        <vehicle_type vehicle_type_id="vehicle_2">
-            <name>Kombi</name>
-        </vehicle_type>
-        <vehicle_type vehicle_type_id="vehicle_3">
-            <name>Hatchback</name>
-        </vehicle_type>
-        <vehicle_type vehicle_type_id="vehicle_4">
-            <name>SUV</name>
-        </vehicle_type>
-        <vehicle_type vehicle_type_id="vehicle_5">
-            <name>Coupe</name>
-        </vehicle_type>
+        <vehicle_type vehicle_type_id="vehicle_1">Sedan</vehicle_type>
+        <vehicle_type vehicle_type_id="vehicle_2">Kombi</vehicle_type>
+        <vehicle_type vehicle_type_id="vehicle_3">Hatchback</vehicle_type>
+        <vehicle_type vehicle_type_id="vehicle_4">SUV</vehicle_type>
+        <vehicle_type vehicle_type_id="vehicle_5">Coupe</vehicle_type>
     </vehicle_types>
 
     <engine_types>
-        <engine_type engine_id="engine_1">
-            <name>petrol</name>
-        </engine_type>
-        <engine_type engine_id="engine_2">
-            <name>diesel</name>
-        </engine_type>
+        <engine_type engine_id="engine_1">petrol</engine_type>
+        <engine_type engine_id="engine_2">diesel</engine_type>
     </engine_types>
 
     <cars>
