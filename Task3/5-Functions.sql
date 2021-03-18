@@ -48,7 +48,7 @@ $$;
 SELECT *
 FROM get_all_data();
 
---
+-- Display chosen cars based on brand name
 CREATE OR REPLACE FUNCTION get_cars_chosen_brand(chosen_brand_name TEXT)
     RETURNS TABLE (
         model             TEXT,
@@ -76,3 +76,35 @@ $$;
 
 SELECT *
 FROM get_cars_chosen_brand('Audi');
+
+-- Display chosen cars based on vehicle type name
+CREATE OR REPLACE FUNCTION get_cars_chosen_vehicle_type(chosen_vehicle_type_name TEXT)
+    RETURNS TABLE (
+        model             TEXT,
+        production_year   TEXT,
+        price             TEXT,
+        brand_name        TEXT,
+        vehicle_type_name TEXT,
+        engine_type_name  TEXT
+    )
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM get_all_vehicle_types()
+    WHERE get_all_vehicle_types.vehicle_type_name = chosen_vehicle_type_name;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_vehicle_type_name does not exist!';
+    ELSE
+        RETURN QUERY SELECT *
+                     FROM get_all_data() AS data
+                     WHERE data.vehicle_type_name = chosen_vehicle_type_name;
+
+    END IF;
+END;
+$$;
+
+SELECT *
+FROM get_cars_chosen_vehicle_type('Kombi');
