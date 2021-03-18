@@ -55,7 +55,7 @@ FROM get_all_vehicle_types();
 -- Display Engine Types
 CREATE OR REPLACE FUNCTION get_all_engine_types()
     RETURNS TABLE (
-        engine_id   TEXT,
+        engine_id        TEXT,
         engine_type_name TEXT
     )
     LANGUAGE plpgsql
