@@ -6,4 +6,43 @@ CREATE TABLE IF NOT EXISTS car_showroom_single_column (
 ALTER TABLE car_showroom_single_column
     OWNER TO postgres;
 
--- TODO ADD MORE TABLES - WITH SPECIFIC COLUMNS
+--TABLES - WITH SPECIFIC COLUMNS
+CREATE TABLE IF NOT EXISTS brands (
+    brand_id   TEXT PRIMARY KEY,
+    brand_name TEXT NOT NULL
+);
+
+ALTER TABLE brands
+    OWNER TO postgres;
+
+
+CREATE TABLE IF NOT EXISTS vehicle_types (
+    vehicle_type_id   TEXT PRIMARY KEY,
+    vehicle_type_name TEXT NOT NULL
+);
+
+ALTER TABLE vehicle_types
+    OWNER TO postgres;
+
+
+CREATE TABLE IF NOT EXISTS engine_types (
+    engine_type_id   TEXT PRIMARY KEY,
+    engine_type_name TEXT NOT NULL
+);
+
+ALTER TABLE engine_types
+    OWNER TO postgres;
+
+
+CREATE TABLE IF NOT EXISTS cars (
+    car_id          TEXT PRIMARY KEY,
+    brand_id        TEXT  NOT NULL,
+    vehicle_type_id TEXT  NOT NULL,
+    engine_id       TEXT  NOT NULL,
+    model           TEXT  NOT NULL,
+    production_year INT   NOT NULL,
+    price           FLOAT NOT NULL
+);
+
+ALTER TABLE cars
+    OWNER TO postgres;

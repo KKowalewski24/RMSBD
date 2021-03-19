@@ -1,5 +1,32 @@
+-- Insert all data into single column
 CREATE OR REPLACE FUNCTION get_xml_file_content(filepath TEXT)
     RETURNS XML
+    LANGUAGE plpgsql
+AS
+$$
+DECLARE
+    content XML;
+BEGIN
+    CREATE TEMPORARY TABLE IF NOT EXISTS temp_xml_content (
+        xml_content XML
+    );
+
+    EXECUTE format('COPY temp_xml_content FROM %L ', filepath);
+    content = (
+                  SELECT xml_content
+                  FROM temp_xml_content
+              );
+    DROP TABLE temp_xml_content;
+    RETURN content;
+END;
+$$;
+
+INSERT INTO car_showroom_single_column (xml_data)
+VALUES (get_xml_file_content('C:\Coding\RMSBD\Task3\car-showroom-minified.xml'));
+
+
+-- Fill tables with specific data
+CREATE OR REPLACE PROCEDURE fill_tables_with_xml_content(filepath TEXT)
     LANGUAGE plpgsql
 AS
 $$
@@ -10,20 +37,22 @@ BEGIN
         xml_content XML
     );
 
-    -- There is no other option - path must be absolute and it cannot passed as parameter
-    EXECUTE format('COPY temp_content FROM %L ', filepath);
-    content = (
-                  SELECT xml_content
-                  FROM temp_content
-              );
+    INSERT INTO temp_content(xml_content) VALUES (get_xml_file_content(filepath));
+
+    INSERT INTO brands (brand_id, brand_name)
+    SELECT xmltable.*
+    FROM temp_content,
+        XMLTABLE('/car_showroom/brands/brand' PASSING xml_content
+                 COLUMNS
+                     brand_id TEXT PATH '@brand_id' NOT NULL ,
+                     brand_name TEXT PATH '.' NOT NULL
+            );
+
     DROP TABLE temp_content;
-    RETURN content;
 END;
 $$;
 
--- Insert all data into single column
-INSERT INTO car_showroom_single_column (xml_data)
-VALUES (get_xml_file_content('C:\Coding\RMSBD\Task3\car-showroom-minified.xml'))
+CALL fill_tables_with_xml_content('C:\Coding\RMSBD\Task3\car-showroom-minified.xml');
 
 ---------------------------------------
 
