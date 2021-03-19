@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE xml_export(filepath TEXT)
+CREATE OR REPLACE PROCEDURE xml_export_single_column(filepath TEXT)
     LANGUAGE plpgsql
 AS
 $$
@@ -8,6 +8,6 @@ BEGIN
 END;
 $$;
 
-CALL xml_export('C:\Coding\RMSBD\Task3\car-showroom-out.xml');
+CALL xml_export_single_column('C:\Coding\RMSBD\Task3\car-showroom-out.xml');
 
 ---------------------------------------
