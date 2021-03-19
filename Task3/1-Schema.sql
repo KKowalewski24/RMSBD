@@ -7,34 +7,36 @@ ALTER TABLE car_showroom_single_column
     OWNER TO postgres;
 
 --TABLES - WITH SPECIFIC COLUMNS
-CREATE TABLE IF NOT EXISTS brands (
+CREATE SCHEMA IF NOT EXISTS xml_mapping;
+
+CREATE TABLE IF NOT EXISTS xml_mapping.brands (
     brand_id   TEXT PRIMARY KEY,
     brand_name TEXT NOT NULL
 );
 
-ALTER TABLE brands
+ALTER TABLE xml_mapping.brands
     OWNER TO postgres;
 
 
-CREATE TABLE IF NOT EXISTS vehicle_types (
+CREATE TABLE IF NOT EXISTS xml_mapping.vehicle_types (
     vehicle_type_id   TEXT PRIMARY KEY,
     vehicle_type_name TEXT NOT NULL
 );
 
-ALTER TABLE vehicle_types
+ALTER TABLE xml_mapping.vehicle_types
     OWNER TO postgres;
 
 
-CREATE TABLE IF NOT EXISTS engine_types (
+CREATE TABLE IF NOT EXISTS xml_mapping.engine_types (
     engine_type_id   TEXT PRIMARY KEY,
     engine_type_name TEXT NOT NULL
 );
 
-ALTER TABLE engine_types
+ALTER TABLE xml_mapping.engine_types
     OWNER TO postgres;
 
 
-CREATE TABLE IF NOT EXISTS cars (
+CREATE TABLE IF NOT EXISTS xml_mapping.cars (
     car_id          TEXT PRIMARY KEY,
     brand_id        TEXT  NOT NULL,
     vehicle_type_id TEXT  NOT NULL,
@@ -44,5 +46,5 @@ CREATE TABLE IF NOT EXISTS cars (
     price           FLOAT NOT NULL
 );
 
-ALTER TABLE cars
+ALTER TABLE xml_mapping.cars
     OWNER TO postgres;
