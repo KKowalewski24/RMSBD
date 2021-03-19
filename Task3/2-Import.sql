@@ -30,8 +30,6 @@ CREATE OR REPLACE PROCEDURE fill_tables_with_xml_content(filepath TEXT)
     LANGUAGE plpgsql
 AS
 $$
-DECLARE
-    content XML;
 BEGIN
     CREATE TEMPORARY TABLE IF NOT EXISTS temp_content (
         xml_content XML
@@ -46,6 +44,39 @@ BEGIN
                  COLUMNS
                      brand_id TEXT PATH '@brand_id' NOT NULL ,
                      brand_name TEXT PATH '.' NOT NULL
+            );
+
+    INSERT INTO vehicle_types (vehicle_type_id, vehicle_type_name)
+    SELECT xmltable.*
+    FROM temp_content,
+        XMLTABLE('/car_showroom/vehicle_types/vehicle_type' PASSING xml_content
+                 COLUMNS
+                     vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
+                     vehicle_type_name TEXT PATH '.' NOT NULL
+            );
+
+    INSERT INTO engine_types (engine_type_id, engine_type_name)
+    SELECT xmltable.*
+    FROM temp_content,
+        XMLTABLE('/car_showroom/engine_types/engine_type' PASSING xml_content
+                 COLUMNS
+                     engine_id TEXT PATH '@engine_id' NOT NULL,
+                     engine_type_name TEXT PATH '.' NOT NULL
+            );
+
+    INSERT INTO cars (car_id, brand_id, vehicle_type_id, engine_id, model,
+                      production_year, price)
+    SELECT xmltable.*
+    FROM temp_content,
+        XMLTABLE('/car_showroom/cars/car' PASSING xml_content
+                 COLUMNS
+                     car_id TEXT PATH '@car_id' NOT NULL,
+                     brand_id TEXT PATH '@brand_id' NOT NULL,
+                     vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
+                     engine_id TEXT PATH '@engine_id' NOT NULL,
+                     model TEXT PATH 'model' NOT NULL,
+                     production_year INT PATH 'production_year' NOT NULL,
+                     price FLOAT PATH 'price' NOT NULL
             );
 
     DROP TABLE temp_content;
