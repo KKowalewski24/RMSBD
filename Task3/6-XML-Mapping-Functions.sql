@@ -121,3 +121,33 @@ END;
 $$;
 
 CALL delete_car('car_6');
+
+
+-- Delete brand and cars that belong to this brand - this function
+-- imitates finishing of cooperation with chosen brand and giving
+-- back all cars - deleting them from DB
+CREATE OR REPLACE PROCEDURE delete_brand(chosen_brand_id TEXT)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM brands
+    WHERE brand_id = chosen_brand_id;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_brand_id does not exist!';
+        RETURN;
+    END IF;
+
+    DELETE
+    FROM cars
+    WHERE brand_id = chosen_brand_id;
+
+    DELETE
+    FROM brands
+    WHERE brand_id = chosen_brand_id;
+END;
+$$;
+
+CALL delete_brand('brand_1');
