@@ -5,8 +5,8 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_brand(chosen_brand_name TEXT)
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
         model             TEXT,
-        production_year   TEXT,
-        price             TEXT
+        production_year   INT,
+        price             FLOAT
     )
     LANGUAGE plpgsql
 AS
@@ -35,8 +35,8 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_vehicle_type(chosen_vehicle_type_name
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
         model             TEXT,
-        production_year   TEXT,
-        price             TEXT
+        production_year   INT,
+        price             FLOAT
     )
     LANGUAGE plpgsql
 AS
@@ -68,8 +68,8 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_engine_type(chosen_engine_type_name T
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
         model             TEXT,
-        production_year   TEXT,
-        price             TEXT
+        production_year   INT,
+        price             FLOAT
     )
     LANGUAGE plpgsql
 AS

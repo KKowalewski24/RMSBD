@@ -84,8 +84,8 @@ CREATE OR REPLACE FUNCTION get_all_cars()
         vehicle_type_id TEXT,
         engine_id       TEXT,
         model           TEXT,
-        production_year TEXT,
-        price           TEXT
+        production_year INT,
+        price           FLOAT
     )
     LANGUAGE plpgsql
 AS
@@ -100,8 +100,8 @@ BEGIN
                          vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
                          engine_id TEXT PATH '@engine_id' NOT NULL,
                          model TEXT PATH 'model' NOT NULL,
-                         production_year TEXT PATH 'production_year' NOT NULL,
-                         price TEXT PATH 'price' NOT NULL
+                         production_year INT PATH 'production_year' NOT NULL,
+                         price FLOAT PATH 'price' NOT NULL
                 );
 END;
 $$;
@@ -116,9 +116,9 @@ CREATE OR REPLACE FUNCTION get_all_data()
         brand_name        TEXT,
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
-        model             TEXT,
-        production_year   TEXT,
-        price             TEXT
+        model             TEXT,production_year   INT,
+        price             FLOAT
+
     )
     LANGUAGE plpgsql
 AS
@@ -149,8 +149,8 @@ BEGIN
                                    vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
                                    engine_id TEXT PATH '@engine_id' NOT NULL,
                                    model TEXT PATH 'model' NOT NULL,
-                                   production_year TEXT PATH 'production_year' NOT NULL,
-                                   price TEXT PATH 'price' NOT NULL
+                                   production_year INT PATH 'production_year' NOT NULL,
+                                   price FLOAT PATH 'price' NOT NULL
                           ) car
                  WHERE car.brand_id = brand.brand_id
                    AND car.vehicle_type_id = vehicle_type.vehicle_type_id
