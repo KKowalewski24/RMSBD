@@ -73,3 +73,27 @@ END;
 $$;
 
 CALL update_car_price('car_1', 160000);
+
+
+-- Delete car - this function imitates selling the car
+CREATE OR REPLACE PROCEDURE delete_car(chosen_car_id TEXT)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM cars
+    WHERE car_id = chosen_car_id;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_car_id does not exist!';
+        RETURN;
+    END IF;
+
+    DELETE
+    FROM cars
+    WHERE car_id = chosen_car_id;
+END;
+$$;
+
+CALL delete_car('car_6');
