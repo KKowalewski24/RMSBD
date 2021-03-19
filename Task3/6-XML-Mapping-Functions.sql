@@ -75,6 +75,30 @@ $$;
 CALL update_car_price('car_1', 160000);
 
 
+-- Change engine type in car
+CREATE OR REPLACE PROCEDURE update_car_engine_type(chosen_car_id TEXT, chosen_engine_type_id TEXT)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM cars
+    WHERE car_id = chosen_car_id;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_car_id does not exist!';
+        RETURN;
+    END IF;
+
+    UPDATE cars
+    SET engine_type_id = chosen_engine_type_id
+    WHERE car_id = chosen_car_id;
+END;
+$$;
+
+CALL update_car_engine_type('car_13', 'engine_2');
+
+
 -- Delete car - this function imitates selling the car
 CREATE OR REPLACE PROCEDURE delete_car(chosen_car_id TEXT)
     LANGUAGE plpgsql

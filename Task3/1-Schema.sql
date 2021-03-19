@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS car_showroom_single_column (
 ALTER TABLE car_showroom_single_column
     OWNER TO postgres;
 
---TABLES - WITH SPECIFIC COLUMNS
+-- TABLES - WITH SPECIFIC COLUMNS
 CREATE SCHEMA IF NOT EXISTS xml_mapping;
 
 CREATE TABLE IF NOT EXISTS xml_mapping.brands (
