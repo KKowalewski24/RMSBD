@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS cars (
     car_id          TEXT PRIMARY KEY,
     brand_id        TEXT  NOT NULL,
     vehicle_type_id TEXT  NOT NULL,
-    engine_id       TEXT  NOT NULL,
+    engine_type_id  TEXT  NOT NULL,
     model           TEXT  NOT NULL,
     production_year INT   NOT NULL,
     price           FLOAT NOT NULL

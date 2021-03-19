@@ -55,7 +55,7 @@ FROM get_all_vehicle_types();
 -- Display Engine Types
 CREATE OR REPLACE FUNCTION get_all_engine_types()
     RETURNS TABLE (
-        engine_id        TEXT,
+        engine_type_id   TEXT,
         engine_type_name TEXT
     )
     LANGUAGE plpgsql
@@ -67,7 +67,7 @@ BEGIN
         FROM car_showroom_single_column,
             XMLTABLE('/car_showroom/engine_types/engine_type' PASSING xml_data
                      COLUMNS
-                         engine_id TEXT PATH '@engine_id' NOT NULL,
+                         engine_type_id TEXT PATH '@engine_type_id' NOT NULL,
                          engine_type_name TEXT PATH '.' NOT NULL
                 );
 END;
@@ -82,7 +82,7 @@ CREATE OR REPLACE FUNCTION get_all_cars()
     RETURNS TABLE (
         brand_id        TEXT,
         vehicle_type_id TEXT,
-        engine_id       TEXT,
+        engine_type_id  TEXT,
         car_id          TEXT,
         model           TEXT,
         production_year INT,
@@ -99,7 +99,7 @@ BEGIN
                      COLUMNS
                          brand_id TEXT PATH '@brand_id' NOT NULL,
                          vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
-                         engine_id TEXT PATH '@engine_id' NOT NULL,
+                         engine_type_id TEXT PATH '@engine_type_id' NOT NULL,
                          car_id TEXT PATH '@car_id' NOT NULL,
                          model TEXT PATH 'model' NOT NULL,
                          production_year INT PATH 'production_year' NOT NULL,
@@ -143,14 +143,14 @@ BEGIN
                           ) vehicle_type,
                       XMLTABLE('/car_showroom/engine_types/engine_type' PASSING xml_data
                                COLUMNS
-                                   engine_id TEXT PATH '@engine_id' NOT NULL,
+                                   engine_type_id TEXT PATH '@engine_type_id' NOT NULL,
                                    engine_type_name TEXT PATH '.' NOT NULL
                           ) engine_type,
                       XMLTABLE('/car_showroom/cars/car' PASSING xml_data
                                COLUMNS
                                    brand_id TEXT PATH '@brand_id' NOT NULL,
                                    vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
-                                   engine_id TEXT PATH '@engine_id' NOT NULL,
+                                   engine_type_id TEXT PATH '@engine_type_id' NOT NULL,
                                    car_id TEXT PATH '@car_id' NOT NULL,
                                    model TEXT PATH 'model' NOT NULL,
                                    production_year INT PATH 'production_year' NOT NULL,
@@ -158,7 +158,7 @@ BEGIN
                           ) car
                  WHERE car.brand_id = brand.brand_id
                    AND car.vehicle_type_id = vehicle_type.vehicle_type_id
-                   AND car.engine_id = engine_type.engine_id;
+                   AND car.engine_type_id = engine_type.engine_type_id;
 END;
 $$;
 
