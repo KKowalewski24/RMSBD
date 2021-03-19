@@ -25,85 +25,85 @@
 
     <cars>
         <!-- AUDI -->
-        <car brand_id="brand_1" vehicle_type_id="vehicle_1" engine_id="engine_1">
+        <car car_id="car_1" brand_id="brand_1" vehicle_type_id="vehicle_1" engine_id="engine_1">
             <model>A4</model>
             <production_year>2018</production_year>
             <price>280000</price>
         </car>
-        <car brand_id="brand_1" vehicle_type_id="vehicle_2" engine_id="engine_2">
+        <car car_id="car_2" brand_id="brand_1" vehicle_type_id="vehicle_2" engine_id="engine_2">
             <model>A6</model>
             <production_year>2015</production_year>
             <price>150000</price>
         </car>
-        <car brand_id="brand_1" vehicle_type_id="vehicle_4" engine_id="engine_2">
+        <car car_id="car_3" brand_id="brand_1" vehicle_type_id="vehicle_4" engine_id="engine_2">
             <model>SQ7</model>
             <production_year>2020</production_year>
             <price>650000</price>
         </car>
 
         <!-- Seat -->
-        <car brand_id="brand_2" vehicle_type_id="vehicle_3" engine_id="engine_2">
+        <car car_id="car_4" brand_id="brand_2" vehicle_type_id="vehicle_3" engine_id="engine_2">
             <model>Leon</model>
             <production_year>2017</production_year>
             <price>80000</price>
         </car>
-        <car brand_id="brand_2" vehicle_type_id="vehicle_4" engine_id="engine_2">
+        <car car_id="car_5" brand_id="brand_2" vehicle_type_id="vehicle_4" engine_id="engine_2">
             <model>Ateca</model>
             <production_year>2019</production_year>
             <price>140000</price>
         </car>
 
         <!-- Skoda -->
-        <car brand_id="brand_3" vehicle_type_id="vehicle_1" engine_id="engine_1">
+        <car car_id="car_6" brand_id="brand_3" vehicle_type_id="vehicle_1" engine_id="engine_1">
             <model>Octavia</model>
             <production_year>2017</production_year>
             <price>90000</price>
         </car>
-        <car brand_id="brand_3" vehicle_type_id="vehicle_2" engine_id="engine_1">
+        <car car_id="car_7" brand_id="brand_3" vehicle_type_id="vehicle_2" engine_id="engine_1">
             <model>Superb</model>
             <production_year>2019</production_year>
             <price>170000</price>
         </car>
-        <car brand_id="brand_3" vehicle_type_id="vehicle_4" engine_id="engine_2">
+        <car car_id="car_8" brand_id="brand_3" vehicle_type_id="vehicle_4" engine_id="engine_2">
             <model>Karoq</model>
             <production_year>2020</production_year>
             <price>130000</price>
         </car>
 
         <!-- Volkswagen -->
-        <car brand_id="brand_4" vehicle_type_id="vehicle_3" engine_id="engine_1">
+        <car car_id="car_9" brand_id="brand_4" vehicle_type_id="vehicle_3" engine_id="engine_1">
             <model>Golf</model>
             <production_year>2018</production_year>
             <price>120000</price>
         </car>
-        <car brand_id="brand_4" vehicle_type_id="vehicle_2" engine_id="engine_2">
+        <car car_id="car_10" brand_id="brand_4" vehicle_type_id="vehicle_2" engine_id="engine_2">
             <model>Passat</model>
             <production_year>2017</production_year>
             <price>130000</price>
         </car>
-        <car brand_id="brand_4" vehicle_type_id="vehicle_4" engine_id="engine_2">
+        <car car_id="car_11" brand_id="brand_4" vehicle_type_id="vehicle_4" engine_id="engine_2">
             <model>Tiguan</model>
             <production_year>2020</production_year>
             <price>180000</price>
         </car>
-        <car brand_id="brand_4" vehicle_type_id="vehicle_4" engine_id="engine_2">
+        <car car_id="car_12" brand_id="brand_4" vehicle_type_id="vehicle_4" engine_id="engine_2">
             <model>Touareg</model>
             <production_year>2019</production_year>
             <price>320000</price>
         </car>
 
         <!-- Porsche -->
-        <car brand_id="brand_5" vehicle_type_id="vehicle_5" engine_id="engine_1">
+        <car car_id="car_13" brand_id="brand_5" vehicle_type_id="vehicle_5" engine_id="engine_1">
             <model>911 GT3</model>
             <production_year>2018</production_year>
             <price>650000</price>
         </car>
-        <car brand_id="brand_5" vehicle_type_id="vehicle_5" engine_id="engine_1">
+        <car car_id="car_14" brand_id="brand_5" vehicle_type_id="vehicle_5" engine_id="engine_1">
             <model>718 Cayman GT4</model>
             <production_year>2020</production_year>
             <price>450000</price>
         </car>
-        <car brand_id="brand_5" vehicle_type_id="vehicle_2" engine_id="engine_1">
+        <car car_id="car_15" brand_id="brand_5" vehicle_type_id="vehicle_2" engine_id="engine_1">
             <model>Panamera Turbo Sport Turismo</model>
             <production_year>2018</production_year>
             <price>540000</price>

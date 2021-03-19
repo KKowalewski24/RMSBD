@@ -83,6 +83,7 @@ CREATE OR REPLACE FUNCTION get_all_cars()
         brand_id        TEXT,
         vehicle_type_id TEXT,
         engine_id       TEXT,
+        car_id          TEXT,
         model           TEXT,
         production_year INT,
         price           FLOAT
@@ -99,6 +100,7 @@ BEGIN
                          brand_id TEXT PATH '@brand_id' NOT NULL,
                          vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
                          engine_id TEXT PATH '@engine_id' NOT NULL,
+                         car_id TEXT PATH '@car_id' NOT NULL,
                          model TEXT PATH 'model' NOT NULL,
                          production_year INT PATH 'production_year' NOT NULL,
                          price FLOAT PATH 'price' NOT NULL
@@ -116,17 +118,18 @@ CREATE OR REPLACE FUNCTION get_all_data()
         brand_name        TEXT,
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
-        model             TEXT,production_year   INT,
+        car_id            TEXT,
+        model             TEXT,
+        production_year   INT,
         price             FLOAT
-
     )
     LANGUAGE plpgsql
 AS
 $$
 BEGIN
     RETURN QUERY SELECT brand.brand_name, vehicle_type.vehicle_type_name,
-                        engine_type.engine_type_name, car.model, car.production_year,
-                        car.price
+                        engine_type.engine_type_name, car.car_id, car.model,
+                        car.production_year, car.price
                  FROM car_showroom_single_column,
                       XMLTABLE('/car_showroom/brands/brand' PASSING xml_data
                                COLUMNS
@@ -148,6 +151,7 @@ BEGIN
                                    brand_id TEXT PATH '@brand_id' NOT NULL,
                                    vehicle_type_id TEXT PATH '@vehicle_type_id' NOT NULL,
                                    engine_id TEXT PATH '@engine_id' NOT NULL,
+                                   car_id TEXT PATH '@car_id' NOT NULL,
                                    model TEXT PATH 'model' NOT NULL,
                                    production_year INT PATH 'production_year' NOT NULL,
                                    price FLOAT PATH 'price' NOT NULL

@@ -4,6 +4,7 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_brand(chosen_brand_name TEXT)
         brand_name        TEXT,
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
+        car_id            TEXT,
         model             TEXT,
         production_year   INT,
         price             FLOAT
@@ -34,6 +35,7 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_vehicle_type(chosen_vehicle_type_name
         brand_name        TEXT,
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
+        car_id            TEXT,
         model             TEXT,
         production_year   INT,
         price             FLOAT
@@ -67,6 +69,7 @@ CREATE OR REPLACE FUNCTION get_cars_chosen_engine_type(chosen_engine_type_name T
         brand_name        TEXT,
         vehicle_type_name TEXT,
         engine_type_name  TEXT,
+        car_id            TEXT,
         model             TEXT,
         production_year   INT,
         price             FLOAT
