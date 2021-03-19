@@ -25,3 +25,51 @@ $$;
 
 SELECT *
 FROM get_all_data_mapping();
+
+
+-- Update car production year
+CREATE OR REPLACE PROCEDURE update_car_production_year(chosen_car_id TEXT, chosen_production_year INT)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM cars
+    WHERE car_id = chosen_car_id;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_car_id does not exist!';
+        RETURN;
+    END IF;
+
+    UPDATE cars
+    SET production_year = chosen_production_year
+    WHERE car_id = chosen_car_id;
+END;
+$$;
+
+CALL update_car_production_year('car_1', 2015);
+
+
+-- Update car price
+CREATE OR REPLACE PROCEDURE update_car_price(chosen_car_id TEXT, chosen_price INT)
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    PERFORM *
+    FROM cars
+    WHERE car_id = chosen_car_id;
+
+    IF NOT found THEN
+        RAISE NOTICE 'Passed chosen_car_id does not exist!';
+        RETURN;
+    END IF;
+
+    UPDATE cars
+    SET price = chosen_price
+    WHERE car_id = chosen_car_id;
+END;
+$$;
+
+CALL update_car_price('car_1', 160000);
