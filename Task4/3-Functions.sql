@@ -1,3 +1,5 @@
+-- https://gis.stackexchange.com/questions/57018/get-lon-lat-values-from-a-geography-data-type-in-postgis
+
 -- Display All showrooms
 CREATE OR REPLACE FUNCTION get_all_showrooms()
     RETURNS TABLE (
@@ -23,6 +25,7 @@ $$;
 
 SELECT *
 FROM get_all_showrooms();
+
 
 -- Display chosen showroom
 CREATE OR REPLACE FUNCTION get_chosen_showrooms(chosen_id INT)
