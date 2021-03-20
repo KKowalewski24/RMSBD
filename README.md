@@ -8,7 +8,7 @@
 * Open file with Schema and run - remember to set proper database - select on left top corner
 * Open file with Insert data and run - remember to set proper database - select on left top corner
 
-#### Code Style Rules and Formatter - For C# Schema and Data Generator
+#### Code Style Rules and Formatter For C# - Schema and Data Generator
 Formatter for Schema Generators: [dotnet-format](https://github.com/dotnet/format)
 ```
 dotnet tool install -g dotnet-format
