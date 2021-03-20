@@ -16,5 +16,5 @@ END;
 $$;
 
 CALL add_showroom('Porsche Centrum Parzęczew', 'Parzęczew',
-                  'Łęczycka', '12',
+                  'ul. Łęczycka', '12',
                   19.207456240112236, 51.950346456472566);
