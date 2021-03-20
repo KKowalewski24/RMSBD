@@ -13,10 +13,12 @@ import essentia.standard as es
 from musicnn.extractor import extractor
 from uuid import uuid4
 
+import similarity
+
 
 def connect_to_database():
     return psycopg2.connect(host='localhost',
-                            database='songs',
+                            database='song',
                             user='song',
                             password='song')
 
@@ -189,6 +191,13 @@ if __name__ == '__main__':
     find_similar_parser = argparse.ArgumentParser(
         description="Find similar songs from audio database",
         prog=sys.argv[0] + " find_similar")
+    find_similar_parser.add_argument("id")
+    find_similar_parser.add_argument("--by_length", action="store_true")
+    find_similar_parser.add_argument("--by_loudness", action="store_true")
+    find_similar_parser.add_argument("--by_tempo", action="store_true")
+    find_similar_parser.add_argument("--by_harmony", action="store_true")
+    find_similar_parser.add_argument("--by_chords", action="store_true")
+    find_similar_parser.add_argument("--by_tags", action="store_true")
 
     play_parser = argparse.ArgumentParser(description="Play selected song",
                                           prog=sys.argv[0] + " play")
@@ -216,6 +225,14 @@ if __name__ == '__main__':
                             args.length_range, args.bpm_range, args.tag))
             for song in cursor.fetchall():
                 print(song)
+
+    if main_args.action == "find_similar":
+        args = find_similar_parser.parse_args(sys.argv[2:])
+        print(
+            similarity.find_similar(connection, args.id, args.by_length,
+                                    args.by_loudness, args.by_tempo,
+                                    args.by_harmony, args.by_chords,
+                                    args.by_tags))
 
     if main_args.action == "play":
         args = play_parser.parse_args(sys.argv[2:])
