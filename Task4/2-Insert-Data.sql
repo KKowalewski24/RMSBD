@@ -1,4 +1,5 @@
 -- https://gis.stackexchange.com/questions/362495/how-to-add-google-maps-coordinates-into-arcmap
+-- https://www.gps-coordinates.net/
 -- In Point() the Decimal degrees are used - standard in GIS systems
 -- In case of taking coordinates from Google Maps remember to change order
 -- GIS requires (X, Y) but Google Maps give (Y, X) where X - Longitude, Y - Latitude
