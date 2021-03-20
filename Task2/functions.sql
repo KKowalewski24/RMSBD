@@ -1,7 +1,7 @@
 CREATE OR REPLACE FUNCTION list_songs(artist_arg text, album_arg text, year_arg integer, length_range float[2], bpm_range integer[2], tags_arg text[]) 
-    RETURNS TABLE(id uuid, title text, album text, year integer, length real, bpm real, tags text[]) 
+    RETURNS TABLE(id uuid, artist text, title text, album text, year integer, tags text[]) 
 AS $$
-    SELECT songs_external_metadata.id, title, album, year, length, bpm, tags FROM songs_external_metadata
+    SELECT songs_external_metadata.id, artist, title, album, year, tags FROM songs_external_metadata
         INNER JOIN songs_features ON songs_features.id = songs_external_metadata.id
         WHERE 
             (artist_arg IS NULL OR artist_arg = artist) AND

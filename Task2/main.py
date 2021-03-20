@@ -147,10 +147,10 @@ if __name__ == '__main__':
         description="Import song or songs to audio database",
         prog=sys.argv[0] + " import")
     import_parser.add_argument("filename", metavar="filename/dirname")
-    import_parser.add_argument("title", nargs='?')
-    import_parser.add_argument("album")
-    import_parser.add_argument("artist")
-    import_parser.add_argument("year", type=int)
+    import_parser.add_argument("--title")
+    import_parser.add_argument("--album")
+    import_parser.add_argument("--artist")
+    import_parser.add_argument("--year", type=int)
 
     export_parser = argparse.ArgumentParser(
         description="Export song from audio database",
