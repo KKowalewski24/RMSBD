@@ -91,11 +91,6 @@ BEGIN
             )
         );
 
-    IF distance = 0 THEN
-        RAISE NOTICE 'distance = 0, cannot divide by ZERO!';
-        RETURN 0;
-    END IF;
-
     -- Convert to KM
     RETURN round(distance / 1000);
 END;
