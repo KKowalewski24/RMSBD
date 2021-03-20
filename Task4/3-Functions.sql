@@ -102,3 +102,35 @@ END;
 $$;
 
 SELECT calculate_showrooms_distance(1, 7) AS distance;
+
+
+-- Display showrooms in chosen polygon area
+CREATE OR REPLACE FUNCTION get_showrooms_in_area()
+    RETURNS TABLE (
+        id              INT,
+        name            TEXT,
+        city            TEXT,
+        street          TEXT,
+        building_number TEXT,
+        longitude       FLOAT,
+        latitude        FLOAT
+    )
+    LANGUAGE plpgsql
+AS
+$$
+DECLARE
+    polygon GEOGRAPHY(Polygon);
+BEGIN
+    polygon = ST_MakePolygon(ST_GeomFromText('LINESTRING(14.646556481635008 52.677461622317956,23.545482216867033 52.697440125576044,15.745189288453775 50.82094314538728,23.776195106298974 50.52852873184189,14.646556481635008 52.677461622317956)'));
+
+    RETURN QUERY
+        SELECT sr.id, sr.name, sr.city, sr.street, sr.building_number,
+               ST_X(sr.location:: GEOMETRY) AS longitude,
+               ST_Y(sr.location:: GEOMETRY) AS latitude
+        FROM showrooms sr
+        WHERE st_intersects(sr.location, polygon);
+END;
+$$;
+
+SELECT *
+FROM get_showrooms_in_area();
