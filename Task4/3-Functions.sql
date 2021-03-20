@@ -105,7 +105,7 @@ SELECT calculate_showrooms_distance(1, 7) AS distance;
 
 
 -- Display showrooms in chosen polygon area
-CREATE OR REPLACE FUNCTION get_showrooms_in_area(area GEOMETRY)
+CREATE OR REPLACE FUNCTION get_showrooms_in_area(points TEXT)
     RETURNS TABLE (
         id              INT,
         name            TEXT,
@@ -121,7 +121,7 @@ $$
 DECLARE
     polygon GEOGRAPHY(Polygon);
 BEGIN
-    polygon = ST_MakePolygon(area);
+    polygon = ST_MakePolygon(ST_GeomFromText(points));
 
     RETURN QUERY
         SELECT sr.id, sr.name, sr.city, sr.street, sr.building_number,
@@ -129,9 +129,9 @@ BEGIN
                ST_Y(sr.location:: GEOMETRY) AS latitude
         FROM showrooms sr
         WHERE st_intersects(sr.location, polygon);
-END;
+END ;
 $$;
 
 SELECT *
-FROM get_showrooms_in_area(ST_GeomFromText(
-        'LINESTRING(14.64 52.67,23.54 52.69,15.74 50.82,23.77 50.52,14.64 52.67)'));
+FROM get_showrooms_in_area(
+        'LINESTRING(14.64 52.67,15.29 51.02,23.77 50.58,23.51 52.86,14.64 52.67)');
