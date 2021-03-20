@@ -43,7 +43,11 @@ CREATE TABLE IF NOT EXISTS xml_mapping.cars (
     engine_type_id  TEXT  NOT NULL,
     model           TEXT  NOT NULL,
     production_year INT   NOT NULL,
-    price           FLOAT NOT NULL
+    price           FLOAT NOT NULL,
+    FOREIGN KEY (brand_id) REFERENCES xml_mapping.brands (brand_id),
+    FOREIGN KEY (vehicle_type_id) REFERENCES xml_mapping.vehicle_types (vehicle_type_id),
+    FOREIGN KEY (engine_type_id) REFERENCES xml_mapping.engine_types (engine_type_id)
+
 );
 
 ALTER TABLE xml_mapping.cars
