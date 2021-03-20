@@ -28,7 +28,7 @@ FROM get_all_showrooms();
 
 
 -- Display chosen showroom
-CREATE OR REPLACE FUNCTION get_chosen_showrooms(chosen_id INT)
+CREATE OR REPLACE FUNCTION get_chosen_showroom(chosen_id INT)
     RETURNS TABLE (
         id              INT,
         name            TEXT,
@@ -52,7 +52,7 @@ END;
 $$;
 
 SELECT *
-FROM get_chosen_showrooms(7);
+FROM get_chosen_showroom(7);
 
 
 -- Calculates distance between two chosen showrooms
