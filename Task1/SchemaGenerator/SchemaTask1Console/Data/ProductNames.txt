@@ -1,0 +1,120 @@
+Red Apples
+Blood Oranges
+Cherries
+Cranberries
+Red Grapes
+Pink/Red Grapefruit
+Red Pears
+Pomegranates
+Raspberries
+Strawberries
+Watermelon
+Beets
+Red Peppers
+Radishes
+Radicchio
+Red Onions
+Red Potatoes
+Rhubarb
+Tomatoes
+Yellow Apples
+Apricots
+Cape Gooseberries
+Cantaloupe
+Yellow Figs
+Grapefruit
+Golden Kiwifruit
+Lemons
+Mangoes
+Nectarines
+Oranges
+Papayas
+Peaches
+Yellow Pears
+Persimmons
+Pineapples
+Tangerines
+Yellow Watermelon
+Yellow Beets
+Butternut Squash
+Carrots
+Yellow Peppers
+Yellow Potatoes
+Pumpkin
+Rutabagas
+Yellow Summer Squash
+Sweet Corn
+Sweet Potatoes
+Yellow Tomatoes
+Yellow Winter Squash
+Bananas
+Dates
+White Nectarines
+White Peaches
+Brown Pears
+Cauliflower
+Garlic
+Ginger
+Jerusalem Artichokes
+Jicama
+Kohlrabi
+Mushrooms
+Onions
+Parsnips
+Potatoes (White Fleshed)
+Shallots
+Turnips
+White Corn
+Avocados
+Green Apples
+Green Grapes
+Honeydew
+Kiwifruit
+Limes
+Green Peas
+Artichokes
+Arugula
+Asparagus
+Broccoflower
+Broccoli
+Broccoli Rabe
+Brussels Sprouts
+Chinese Cabbage
+Green Beans
+Green Cabbage
+Celery
+Chayote Squash
+Cucumbers
+Endive
+Leafy Greens
+Leeks
+Lettuce
+Green Onions
+Okra
+Peas
+Green Peppers
+Snow Peas
+Spinach
+Sugar Snap Peas
+Watercress
+Zucchini
+Blackberries
+Blueberries
+Black Currants
+Concord Grapes
+Dried Plums
+Elderberries
+Grape Juice (100%)
+Purple Figs
+Purple Grapes
+Plums
+Raisins
+Black Olives
+Purple Asparagus
+Purple Cabbage
+Purple Carrots
+Eggplant
+Purple Belgian Endive
+Purple Peppers
+Potatoes (purple fleshed)
+Black Salsify

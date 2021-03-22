@@ -1,0 +1,5 @@
+.idea
+*.xml
+
+!car-showroom.xml
+!car-showroom-minified.xml
